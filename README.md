@@ -1,2 +1,2 @@
-# MytheDEG2016
+# MytheDAG2016
 A mobile game about David and Goliath
