@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private float movementSpeed = 10;
 
     private bool Grounded = false;
-    private float minSensitivity = 0.1f;
+    private float minSensitivity = 0.5f;
 
     private float gravity = 40;
 
@@ -39,27 +39,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (characterController.isGrounded)
         {
-            movementVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Vector3 keyInputs = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            movementVector = new Vector3(keyInputs.x,0,keyInputs.z);
             movementVector = transform.TransformDirection(movementVector);
             movementVector *= speed;
-        }
-        if (Input.GetAxis("Horizontal") == 0)
-        {
-            GetComponent<Rigidbody>().freezeRotation = true;  
-        }
+        }  
+        
 
         movementVector.y -= gravity * Time.deltaTime;
         characterController.Move(movementVector * Time.deltaTime);
     }
 
     void Rotation()
-    {
-        if (Input.GetAxisRaw("Mouse X") > minSensitivity || Input.GetAxisRaw("Mouse X") < -minSensitivity)
+    { 
+        float inputs = Input.GetAxis("Mouse X");
+        if (inputs != 0)
         {
-            playerRotation *= Quaternion.AngleAxis(rotateSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, Vector3.up);            
-        }
-  
-        transform.rotation = playerRotation;
+            transform.eulerAngles += new Vector3(0, inputs * minSensitivity, 0);
+        }        
+
     }
 }
 
