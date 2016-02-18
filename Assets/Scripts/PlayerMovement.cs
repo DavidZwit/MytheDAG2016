@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 movementVector;
     private CharacterController characterController;
 
+    public Animator anim;
+
     private float speed;
     private float movementSpeed = 10;
 
@@ -43,6 +45,17 @@ public class PlayerMovement : MonoBehaviour
             movementVector = new Vector3(keyInputs.x,0,keyInputs.z);
             movementVector = transform.TransformDirection(movementVector);
             movementVector *= speed;
+            if (Input.GetAxis("Horizontal") > minSensitivity || Input.GetAxis("Horizontal") < -minSensitivity)
+            {
+                anim.SetBool("Walk", true);
+            }
+            else
+            {
+                anim.SetBool("Walk", false);
+            }
+            
+            
+
         }  
         
 
