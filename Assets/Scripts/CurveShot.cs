@@ -11,6 +11,8 @@ public class CurveShot : MonoBehaviour
 	[SerializeField] private Transform projectile;      
 	private Transform myCatapult;
 
+	public bool _curveShootAnim = false;
+
 	void Awake()
 	{
 		//print ("Awake Activates");
@@ -33,11 +35,12 @@ public class CurveShot : MonoBehaviour
 	IEnumerator SimulateProjectile()
 	{
 		//print ("IEnumerator ON");
-		
-		
+
 		// Short delay added before Projectile is thrown.
 		yield return new WaitForSeconds(delayTime);
-		
+
+		//Sets the Catapult Animation True
+		_curveShootAnim = true;
 		// Move projectile to the position of throwing object + add some offset if needed.
 		projectile.position = myCatapult.position + new Vector3(0, 1f, 0);
 		
@@ -58,7 +61,8 @@ public class CurveShot : MonoBehaviour
 		projectile.rotation = Quaternion.LookRotation(target.position - projectile.position);
 		
 		float elapseTime = 0;
-		
+
+
 		while (elapseTime < flightDuration)
 		{
 			//The Projectile will keep flying until it has reached his target location.
@@ -70,7 +74,10 @@ public class CurveShot : MonoBehaviour
 			
 			yield return null;
 		}
-		
+
+		//Sets the Catapult Animation false
+		_curveShootAnim = false;
+
 		print ("Projectile Landed");
 		
 		//Instantiate (projectile);	
