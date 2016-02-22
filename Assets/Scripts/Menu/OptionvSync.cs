@@ -4,23 +4,20 @@ using System.Collections;
 
 public class OptionvSync : MonoBehaviour
 {
-    [SerializeField] private Toggle togglevSync;
-    [SerializeField] private Text toggleText;
+    public Dropdown _dropdownvSync;
 
 	void Update ()
     {
         //If toggled on; vSync is enabled
-        if (togglevSync.isOn == true)
+        if (_dropdownvSync.value == 0)
         {
             QualitySettings.vSyncCount = 1;
-            toggleText.text = "On";
         }
 
         //If toggled off; vSync is disabled
-        else
+        else if (_dropdownvSync.value == 1)
         {
             QualitySettings.vSyncCount = 0;
-            toggleText.text = "Off";
         }
 	}
 }

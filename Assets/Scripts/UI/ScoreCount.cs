@@ -6,7 +6,7 @@ public class ScoreCount : MonoBehaviour
 {
     [SerializeField] private Text scoreText;
     private float scoreCounter;
-    public float ScoreCounter
+    public float _ScoreCounter
     {
         get { return scoreCounter; }
         set { scoreCounter = value; }
@@ -14,6 +14,7 @@ public class ScoreCount : MonoBehaviour
 
     void Update()
     {
+        //Setting the score
         scoreText.text = "Score: " + scoreCounter;
     }
 }

@@ -4,21 +4,21 @@ using System.Collections;
 
 public class OptionAF : MonoBehaviour
 { 
-    [SerializeField] Dropdown _dropdownAF;
-    
+    public Dropdown dropdownAF;
+
 	void Update ()
     {
-	    if (_dropdownAF.value == 0)
-        {
-            QualitySettings.anisotropicFiltering = AnisotropicFiltering.Enable;
-        }
-
-        else if (_dropdownAF.value == 1)
+        if (dropdownAF.value == 0)
         {
             QualitySettings.anisotropicFiltering = AnisotropicFiltering.Disable;
         }
 
-        else
+        else if (dropdownAF.value == 1)
+        {
+            QualitySettings.anisotropicFiltering = AnisotropicFiltering.Enable;
+        }
+
+        else if (dropdownAF.value == 2)
         {
             QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
         }

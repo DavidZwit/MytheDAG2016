@@ -5,13 +5,13 @@ public class AddScore : MonoBehaviour
 {
     private ScoreCount scoreCount;
 
-    void Start()
+    void Awake()
     {
         scoreCount = GameObject.Find("Score").GetComponent<ScoreCount>();
     }
 
     public void IncreaseScore()
     {
-        scoreCount.ScoreCounter += 100;
+        scoreCount._ScoreCounter += 100;
     }
 }
