@@ -13,10 +13,16 @@ public class AlertState : State {
 
 	public override void Reason()
     {
-        if(alerted)
+        if (alerted)
         {
-            GetComponent<StateMachine>().SetState(StateID.Fleeing);
+            if (this.tag == "citizen")
+            {
+                GetComponent<StateMachine>().SetState(StateID.Fleeing);
+            }
+            if(this.tag == "soldier")
+            {
+                GetComponent<StateMachine>().SetState(StateID.Charge);
+            }
         }
 	}
-
 }

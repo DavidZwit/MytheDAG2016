@@ -7,7 +7,8 @@ public enum StateID
 	NullStateID = 0,
 	Wandering = 1,
 	Alerting = 2,
-	Fleeing = 3
+	Fleeing = 3,
+    Charge = 4
 }
 
 public class Guard : MonoBehaviour {
@@ -31,6 +32,7 @@ public class Guard : MonoBehaviour {
 		stateMachine.AddState( StateID.Alerting, GetComponent<AlertState>() );
 		stateMachine.AddState( StateID.Wandering, GetComponent<WanderState>() );
 		stateMachine.AddState( StateID.Fleeing, GetComponent<FleeState>() );
-	}
+		stateMachine.AddState( StateID.Charge, GetComponent<ChargeState>() );
+    }
 
 }

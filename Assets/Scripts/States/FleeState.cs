@@ -31,7 +31,7 @@ public class FleeState : State {
             if (distanceFromSave < 1)
             {
                 inSaveZone = true;
-                print(distanceFromSave);
+                //print(distanceFromSave);
             }
             yield return new WaitForSeconds(0.5f);
         }

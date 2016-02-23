@@ -2,10 +2,7 @@
 using System.Collections;
 
 public class WanderState : State {
-    private float testCounter = 1f;
 
-    [SerializeField]
-	private float refreshRate = 0.5f;
 	[SerializeField]
 	private float walkDistance = 5f;
 	private float walkDistancePow;
@@ -42,8 +39,6 @@ public class WanderState : State {
     {
         while(true)
         {
-            //float dist = Vector3.Distance(player.position, transform.position);
-            //print(dist + "rekt");
             distanceFromPlayer = (player.position - transform.position).sqrMagnitude;
             if(distanceFromPlayer < sightDistancePow)
             {
@@ -76,7 +71,7 @@ public class WanderState : State {
             }
             //print(walkDistancePow+ "walk");
             //print(distanceFromStart+ "dist");
-            yield return new WaitForSeconds(refreshRate);
+            yield return new WaitForSeconds(Random.Range(3,5));
         }
     }
 
@@ -93,13 +88,10 @@ public class WanderState : State {
     }
 
 	public override void Reason(){
-		//float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-
 		if(enemySpotted){
-			// laten we switchen naar een nieuwe state
-			GetComponent<StateMachine>().SetState( StateID.Alerting);
             StopCoroutine("chooseTargetLocation");
             StopCoroutine("checkForPlayer");
+            GetComponent<StateMachine>().SetState(StateID.Alerting);
         }
 	}
 }
