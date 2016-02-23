@@ -5,7 +5,8 @@ using System.Collections;
 public class OptionAA : MonoBehaviour
 {
     public Slider sliderAA;
-    [SerializeField] private Text sliderText;
+    [SerializeField]
+    private Text sliderText;
 
     void Update()
     {

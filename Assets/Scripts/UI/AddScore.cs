@@ -9,9 +9,9 @@ public class AddScore : MonoBehaviour
     {
         scoreCount = GameObject.Find("Score").GetComponent<ScoreCount>();
     }
-
-    public void IncreaseScore()
+   
+    public void IncreaseScore(int score)
     {
-        scoreCount._ScoreCounter += 100;
+        scoreCount._ScoreCounter += score;
     }
 }

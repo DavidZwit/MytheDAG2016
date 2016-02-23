@@ -3,10 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class OptionAF : MonoBehaviour
-{ 
+{
     public Dropdown dropdownAF;
 
-	void Update ()
+    void Update()
     {
         if (dropdownAF.value == 0)
         {

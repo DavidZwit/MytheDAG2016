@@ -6,7 +6,7 @@ public class OptionvSync : MonoBehaviour
 {
     public Dropdown _dropdownvSync;
 
-	void Update ()
+    void Update()
     {
         //If toggled on; vSync is enabled
         if (_dropdownvSync.value == 0)
@@ -19,5 +19,5 @@ public class OptionvSync : MonoBehaviour
         {
             QualitySettings.vSyncCount = 0;
         }
-	}
+    }
 }
