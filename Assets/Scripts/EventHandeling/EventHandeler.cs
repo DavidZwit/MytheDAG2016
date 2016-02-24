@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EventHandeler : MonoBehaviour {
 
+    PlayerMovement movement;
     RandomShake screenShake;
 
     public delegate void ReachedObjective();
@@ -17,6 +18,7 @@ public class EventHandeler : MonoBehaviour {
     {
         scoreAdd = GetComponent<AddScore>();
         screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
+        movement = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
     void Start()
@@ -51,6 +53,17 @@ public class EventHandeler : MonoBehaviour {
         {
             scoreAdd.DecreaseScore(100);
             //remove adrealine
+        }
+    }
+
+    public IEnumerator TrapCaught(Collision coll)
+    {
+        //If the player collides with a trap; Stop the playermovement for a while
+        if (coll.gameObject.tag == "Player")
+        {
+            movement.enabled = false;
+            yield return new WaitForSeconds(2f);
+            movement.enabled = true;
         }
     }
 }
