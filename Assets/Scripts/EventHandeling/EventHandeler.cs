@@ -16,7 +16,7 @@ public class EventHandeler : MonoBehaviour {
     void Awake()
     {
         scoreAdd = GetComponent<AddScore>();
-        screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
+        screenShake = GameObject.Find("Main Camera").GetComponent<RandomShake>();
     }
 
     void Start()
