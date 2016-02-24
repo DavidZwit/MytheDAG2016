@@ -49,7 +49,8 @@ public class EventHandeler : MonoBehaviour {
         }
         else if (coll.gameObject.tag == "Player")
         {
-            //remove score
+            scoreAdd.DecreaseScore(100);
+            //remove adrealine
         }
     }
 }

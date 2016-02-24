@@ -9,6 +9,7 @@ public class SavePlayerSettings : MonoBehaviour
     private OptionvSync optionvSync;
     private OptionAF optionAF;
     private OptionAA optionAA;
+    //private TestBerend berendlol;
 
     private int shadowResValue;
     public int ShadowResValue { get { return shadowResValue; } }
@@ -31,6 +32,11 @@ public class SavePlayerSettings : MonoBehaviour
         optionvSync = GameObject.Find("DropdownvSync").GetComponent<OptionvSync>();
         optionAF = GameObject.Find("DropdownAF").GetComponent<OptionAF>();
         optionAA = GameObject.Find("SliderAA").GetComponent<OptionAA>();
+    }
+
+    void Update()
+    {
+        //print(berendlol._shadowValue);
     }
 
     public void SaveSettings()

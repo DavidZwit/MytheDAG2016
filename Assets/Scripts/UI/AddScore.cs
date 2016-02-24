@@ -14,4 +14,9 @@ public class AddScore : MonoBehaviour
     {
         scoreCount._ScoreCounter += score;
     }
+
+    public void DecreaseScore(int score)
+    {
+        scoreCount._ScoreCounter -= score;
+    }
 }
