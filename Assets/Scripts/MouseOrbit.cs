@@ -4,12 +4,12 @@ using System.Collections;
 public class MouseOrbit : MonoBehaviour
 {
     public Transform target;
-    private float distance = 10f;
-    public float setDistance = 10f;
+    private float distance;
+    public float setDistance = 0.1f;
     public float xSpeed = 10f;
     public float ySpeed = 10f;
-    public float yMinLimit = -20;
-    public float yMaxLimit = 80;
+    public float yMinLimit = -10;
+    public float yMaxLimit = 60;
     public float x = 0f;
     public float y = 0f;
 
@@ -31,6 +31,13 @@ public class MouseOrbit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(distance);
+        distance = Raycast3.distance3;
+        if (distance > setDistance)
+        {
+            distance = setDistance;
+        }
+
         if (target)
         {
             x += Input.GetAxisRaw("Mouse X") * xSpeed;
@@ -41,11 +48,6 @@ public class MouseOrbit : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(y, x, 0);
             Vector3 position = rotation * new Vector3(0, 0, -distance) + target.position;
 
-            distance = Raycast3.distance3;
-            if (distance < setDistance || distance > setDistance)
-            {
-                distance = setDistance;
-            }
 
             transform.rotation = rotation;
             transform.position = position;

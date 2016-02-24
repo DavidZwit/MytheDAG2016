@@ -16,7 +16,7 @@ public class EventHandeler : MonoBehaviour {
     void Awake()
     {
         scoreAdd = GetComponent<AddScore>();
-        screenShake = GameObject.Find("Main Camera").GetComponent<RandomShake>();
+        //screenShake = GameObject.Find("Main Camera").GetComponent<RandomShake>();
     }
 
     void Start()
@@ -35,7 +35,7 @@ public class EventHandeler : MonoBehaviour {
 	public void SomethingBroke(GameObject coll)
     {
         scoreAdd.IncreaseScore(100);
-        screenShake.Shake(new Vector2(0.5f, 0.3f), 0.8f, 0.01f);
+        //screenShake.Shake(new Vector2(0.5f, 0.3f), 0.8f, 0.01f);
         coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
         if (coll.gameObject.name == "kasteel_model")
             Application.LoadLevel(0);
