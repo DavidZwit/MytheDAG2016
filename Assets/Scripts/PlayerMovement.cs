@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class PlayerMovement : MonoBehaviour
 {
-
-    private Vector3 movementVector;
     private CharacterController characterController;
-
+    private Vector3 movementVector;
     public Animator anim;
 
     private float speed;
-    private float movementSpeed = 10;
+    private float movementSpeed = 10f;
 
     private bool Grounded = false;
     private float minSensitivity = 0.5f;
@@ -19,22 +18,24 @@ public class PlayerMovement : MonoBehaviour
 
     private Quaternion playerRotation;
     private float turnInput;
-    private float rotateSpeed = 50f;
+    [SerializeField]
+    private float rotateSpeed = 2f;
 
     // Use this for initialization
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        characterController = gameObject.GetComponent<CharacterController>();
+
         speed = movementSpeed;
         playerRotation = transform.rotation;
+       // anim.SetBool("Idle", true);
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
-        Rotation();        
-        Movement();         
+    {               
+        Movement();
+        MouseClick();       
     }
 
     void Movement()
@@ -42,19 +43,23 @@ public class PlayerMovement : MonoBehaviour
         if (characterController.isGrounded)
         {
             Vector3 keyInputs = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            movementVector = new Vector3(keyInputs.x,0,keyInputs.z);
+            movementVector = new Vector3(0,0,keyInputs.z);
             movementVector = transform.TransformDirection(movementVector);
             movementVector *= speed;
-            if (Input.GetAxis("Horizontal") > minSensitivity || Input.GetAxis("Horizontal") < -minSensitivity)
+            
+            if (Input.GetAxis("Vertical") > minSensitivity || Input.GetAxis("Vertical") < -minSensitivity)
             {
-                anim.SetBool("Walk", true);
+               anim.SetBool("Run", true);                
+               anim.SetBool("Idle", false);
             }
             else
             {
-                anim.SetBool("Walk", false);
+               anim.SetBool("Run", false);             
             }
-            
-            
+            if (keyInputs.x > minSensitivity || keyInputs.x <-minSensitivity)
+            {
+                transform.eulerAngles += new Vector3(0, keyInputs.x * rotateSpeed, 0);
+            }             
 
         }  
         
@@ -63,14 +68,12 @@ public class PlayerMovement : MonoBehaviour
         characterController.Move(movementVector * Time.deltaTime);
     }
 
-    void Rotation()
-    { 
-        float inputs = Input.GetAxis("Mouse X");
-        if (inputs != 0)
+    void MouseClick()
+    {
+        if (Input.GetMouseButton(0))
         {
-            transform.eulerAngles += new Vector3(0, inputs * minSensitivity, 0);
-        }        
-
+           anim.SetTrigger("Smash");
+        }
     }
 }
 
