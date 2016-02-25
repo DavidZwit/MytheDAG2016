@@ -21,13 +21,15 @@ public class FleeState : State {
         agent.SetDestination(saveZone.position);
         agent.speed = 20;
         destination = agent.destination;
+        StartCoroutine("toSaveZone");
     }
 
     IEnumerator toSaveZone()
     {
         while (true)
         {
-            distanceFromSave = (destination - transform.position).sqrMagnitude;
+            
+            distanceFromSave = calcDistanceSqrt(destination, transform.position);
             if (distanceFromSave < 1)
             {
                 inSaveZone = true;
@@ -39,7 +41,7 @@ public class FleeState : State {
 
     public override void Act()
     {
-        StartCoroutine("toSaveZone");
+
     }
 	
 	public override void Reason(){

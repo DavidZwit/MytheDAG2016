@@ -11,35 +11,33 @@ public class WanderState : State {
     [SerializeField]
 	private float sightDistance = 5.5f;
     private float sightDistancePow;
-
-    private bool coroutineGoing;
+    
     private bool atPoint;
     private bool enemySpotted;
-
-	[SerializeField]
-	private Transform player;
-
+    
     private Vector3 startPos;
     private Vector3 randomDirection;
 
     private NavMeshAgent agent;
 	
-	public override void Enter(){
-        coroutineGoing = false;
+	public override void Enter()
+    {
+        base.Enter();
         atPoint = true;
         enemySpotted = false;
         sightDistancePow = Mathf.Pow(sightDistance, 2);
         walkDistancePow = Mathf.Pow(walkDistance, 2);
         agent = GetComponent<NavMeshAgent>();
         startPos = transform.position;
-        agent.speed = 4;
+        agent.speed = 4; StartCoroutine("chooseTargetLocation");
+        StartCoroutine("checkForPlayer");
         //print(startPos);
     }
     IEnumerator checkForPlayer()
     {
         while(true)
         {
-            distanceFromPlayer = (player.position - transform.position).sqrMagnitude;
+            distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
             if(distanceFromPlayer < sightDistancePow)
             {
                 enemySpotted = true;
@@ -55,7 +53,7 @@ public class WanderState : State {
     {
         while (true)
         {
-            distanceFromStart = (startPos - transform.position).sqrMagnitude;
+            distanceFromStart = calcDistanceSqrt(startPos, transform.position);
             if (distanceFromStart > walkDistancePow+1)
             {
                 //print("go back");
@@ -76,14 +74,7 @@ public class WanderState : State {
     }
 
 	public override void Act(){
-        //print("woop");
-        if (!coroutineGoing)
-        {
-            StartCoroutine("chooseTargetLocation");
-            StartCoroutine("checkForPlayer");
-            coroutineGoing = true;
-        }
-        //testCounter++;
+        
 
     }
 
