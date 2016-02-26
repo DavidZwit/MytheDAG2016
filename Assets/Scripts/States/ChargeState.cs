@@ -8,16 +8,14 @@ public class ChargeState : State
     private float originalSpeed;
 
     private float distanceFromPlayer;
-
-    private Vector3 destination;
-
+    
     public override void Enter()
     {
         base.Enter();
-        destination = agent.destination;
         agent = GetComponent<NavMeshAgent>();
         StartCoroutine("charge");
-        originalSpeed = agent.speed;
+        originalSpeed = 10;
+        print(agent.speed);
     }
 
     IEnumerator charge()
@@ -25,14 +23,15 @@ public class ChargeState : State
         while (true)
         {
             agent.SetDestination(_player.transform.position);
-            distanceFromPlayer = calcDistanceSqrt(destination, transform.position);
-            if (distanceFromPlayer < 6)
+            distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
+            if (distanceFromPlayer < 3)
             {
                 agent.speed = 0;
                 attack();
             }
             else
             {
+                print("speed = "+ originalSpeed);
                 agent.speed = originalSpeed;
             }
             yield return new WaitForSeconds(0.5f);
