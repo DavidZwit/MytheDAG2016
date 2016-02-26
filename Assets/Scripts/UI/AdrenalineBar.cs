@@ -28,14 +28,14 @@ public class AdrenalineBar : MonoBehaviour {
 				if (maxAdrenaline > adrenaline) {
 
 					adrenaline += adrenalineHitPoints;
-					print (adrenaline);
+					//print (adrenaline);
 
 				}
 			//Else, lower the adrenaline points.
 			} else
 			{
 				adrenaline -= adrenalineRemoval;
-				print (adrenaline);
+				//print (adrenaline);
 
 			}
 

@@ -31,7 +31,7 @@ public class MouseOrbit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(distance);
+        //Debug.Log(distance);
         distance = Raycast3.distance3;
         if (distance > setDistance)
         {
