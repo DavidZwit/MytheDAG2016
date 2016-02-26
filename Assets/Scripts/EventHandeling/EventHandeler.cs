@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class EventHandeler : MonoBehaviour {
-
-    PlayerMovement movement;
+    
     RandomShake screenShake;
 
+    private Transform player;
     public delegate void ReachedObjective();
     public static event ReachedObjective _ObjectiveReached;
 
@@ -18,7 +18,7 @@ public class EventHandeler : MonoBehaviour {
     {
         scoreAdd = GetComponent<AddScore>();
         screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
-        movement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        player = GameObject.Find("Player").GetComponent<Transform>();
     }
 
     void Start()
@@ -56,14 +56,9 @@ public class EventHandeler : MonoBehaviour {
         }
     }
 
-    public IEnumerator TrapCaught(Collision coll)
+    public void PickupProjectile(GameObject coll)
     {
-        //If the player collides with a trap; Stop the playermovement for a while
-        if (coll.gameObject.tag == "Player")
-        {
-            movement.enabled = false;
-            yield return new WaitForSeconds(2f);
-            movement.enabled = true;
-        }
+        coll.gameObject.transform.parent = player;
+        coll.gameObject.transform.position = new Vector3(player.position.x, player.position.y + 3, player.position.z);
     }
 }
