@@ -58,7 +58,19 @@ public class EventHandeler : MonoBehaviour {
 
     public void PickupProjectile(GameObject coll)
     {
-        coll.gameObject.transform.parent = player;
-        coll.gameObject.transform.position = new Vector3(player.position.x, player.position.y + 3, player.position.z);
+        Rigidbody rb = coll.GetComponent<Rigidbody>();
+        coll.transform.parent = player;
+        rb.isKinematic = true;
+        rb.useGravity = false;
+        rb.position = new Vector3(player.position.x, player.position.y + 3, player.position.z);
+    }
+
+    public void ShootProjectile(GameObject coll)
+    {
+        Rigidbody rb = coll.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        coll.transform.parent = null;
+        rb.AddForce(transform.forward * 2500);
     }
 }

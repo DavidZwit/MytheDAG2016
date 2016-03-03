@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerAttack : MonoBehaviour {
 
+    GameObject throwableObj;
     EventHandeler handeler;
     bool attacking;
     bool canThrow = false;
@@ -17,19 +18,23 @@ public class PlayerAttack : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0)) {
             RaycastHit hit;
-            if (canThrow == false) {
+            if (!canThrow) {
                 if (Physics.Raycast(new Ray(transform.position, transform.forward), out hit, hitRange)) {
                     if (hit.collider.gameObject.tag == "Breakable") {
                         handeler.SomethingBroke(hit.collider.gameObject);
                     }
                     else if (hit.collider.gameObject.tag == "Throwable") {
                         print("Found ball to throw");
-                        handeler.PickupProjectile(hit.collider.gameObject);
+                        canThrow = true;
+                        throwableObj = hit.collider.gameObject;
+                        handeler.PickupProjectile(throwableObj);
                     }
                 }
             }
             else {
-                 
+                print("PewPew");
+                handeler.ShootProjectile(throwableObj);
+                canThrow = false;
             }
         }
     }
