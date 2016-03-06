@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class State : MonoBehaviour {
     [HideInInspector]
     public GameObject _player;
+    public bool _alertedByOther;
     
 
     public virtual void Enter ()
@@ -15,7 +16,10 @@ public abstract class State : MonoBehaviour {
 	{
 	} 
 
-	public abstract void Act ();
+	public virtual void Act ()
+    {
+
+    }
 
 	public abstract void Reason ();
 
