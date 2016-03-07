@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            _anim.SetBool("Idle", true);
+            _anim.SetBool("Run", false);
         }
 
     }

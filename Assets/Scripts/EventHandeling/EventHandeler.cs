@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 public class EventHandeler : MonoBehaviour {
 	
@@ -70,7 +70,7 @@ public class EventHandeler : MonoBehaviour {
 
 		if(adrenalineBar.Adrenaline <= 0f)
 		{
-			SceneManager.LoadScene ("StartMenu");
+			//SceneManager.LoadScene ("StartMenu");
 		}
 
 	}
