@@ -48,14 +48,21 @@ public class mapManager : MonoBehaviour {
         {
 
             toPoint = false;
-            for (int i = 0; i < lvlsDone; i++)
+            for (int i = 0; i < waypoints.Length; i++)
             {
-                print(waypoints[i]);
+                //print(waypoints[i]);
                 float distanceFromLvl = (waypoints[i].position - transform.position).sqrMagnitude;
-                if(distanceFromLvl < 12)
+                if (distanceFromLvl < 12)
                 {
-                    SceneManager.LoadScene(1);
-                    print("next lvl plox");
+                    if (i < lvlsDone)
+                    {
+                        SceneManager.LoadScene(1);
+                        print("next lvl plox");
+                    }
+                    else
+                    {
+                        print("GIT GOOD NUB");
+                    }
                 }
             }
         }
