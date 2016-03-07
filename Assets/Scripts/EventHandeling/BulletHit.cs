@@ -13,6 +13,5 @@ public class BulletHit : MonoBehaviour {
     void OnCollisionEnter(Collision coll)
     {
         handeler.BulletHitSomething(coll);
-		//add score
     }
 }

@@ -24,7 +24,7 @@ public class EventHandeler : MonoBehaviour {
 
     void Start()
     {
-		InvokeRepeating ("AdrenalineBarDecreasing" ,1 ,2);
+		InvokeRepeating ("AdrenalineBarDecreasing" ,0.1f ,0.1f);
         brokenObjectsNeededLeft = (breakableObjects / 100) * Mathf.Abs(perCentWonCodition - 100);
     }
 
