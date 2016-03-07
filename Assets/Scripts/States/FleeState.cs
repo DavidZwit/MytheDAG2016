@@ -42,6 +42,8 @@ public class FleeState : State {
     public override void Act()
     {
 
+        base.Act();
+
     }
 	
 	public override void Reason(){
