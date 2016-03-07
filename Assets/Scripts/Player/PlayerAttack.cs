@@ -5,6 +5,7 @@ public class PlayerAttack : MonoBehaviour {
 
     GameObject throwableObj;
     EventHandeler handeler;
+    Projectile projectile;
     bool attacking;
     bool canThrow = false;
     int hitRange = 3;
@@ -12,6 +13,7 @@ public class PlayerAttack : MonoBehaviour {
 	void Awake()
     {
         handeler = GameObject.Find("Handeler").GetComponent<EventHandeler>();
+        projectile = GameObject.Find("Handeler").GetComponent<Projectile>();
     }
 
     void Update()
@@ -19,21 +21,19 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             RaycastHit hit;
             if (!canThrow) {
-                if (Physics.Raycast(new Ray(transform.position, transform.forward), out hit, hitRange)) {
+                if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y -1, transform.position.z), transform.forward), out hit, hitRange)) {
                     if (hit.collider.gameObject.tag == "Breakable") {
                         handeler.SomethingBroke(hit.collider.gameObject);
                     }
                     else if (hit.collider.gameObject.tag == "Throwable") {
-                        print("Found ball to throw");
                         canThrow = true;
                         throwableObj = hit.collider.gameObject;
-                        handeler.PickupProjectile(throwableObj);
+                        projectile.PickupProjectile(throwableObj);
                     }
                 }
             }
             else {
-                print("PewPew");
-                handeler.ShootProjectile(throwableObj);
+                projectile.ShootProjectile(throwableObj);
                 canThrow = false;
             }
         }
