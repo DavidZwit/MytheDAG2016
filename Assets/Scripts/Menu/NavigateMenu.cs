@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NavigateMenu : MonoBehaviour
+public class NavigateMenu : SavePlayerSettings
 {
     private GameObject buttonMenu;
     private GameObject optionMenu;
@@ -10,6 +10,8 @@ public class NavigateMenu : MonoBehaviour
     {
         buttonMenu = GameObject.Find("ButtonMenu");
         optionMenu = GameObject.Find("OptionMenu");
+
+        LoadSettings();
 
         optionMenu.SetActive(false);
     }

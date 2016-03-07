@@ -1,30 +1,30 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
-public class OptionShadowDist : MonoBehaviour
+public class TestBerend : MonoBehaviour
 {
-    public Dropdown dropdownShadowDistance;
+    public int _shadowValue;
 
-    void Update()
+    public void shadowDistanceChanged(int value)
     {
+        _shadowValue = value;
 
-        if (dropdownShadowDistance.value == 0)
+        if (value == 0)
         {
             QualitySettings.shadowDistance = 15;
         }
 
-        else if (dropdownShadowDistance.value == 1)
+        else if (value == 1)
         {
             QualitySettings.shadowDistance = 30;
         }
 
-        else if (dropdownShadowDistance.value == 2)
+        else if (value == 2)
         {
             QualitySettings.shadowDistance = 55;
         }
 
-        else if (dropdownShadowDistance.value == 3)
+        else if (value == 3)
         {
             QualitySettings.shadowDistance = 100;
         }

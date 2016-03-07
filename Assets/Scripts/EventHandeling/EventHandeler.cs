@@ -57,6 +57,7 @@ public class EventHandeler : MonoBehaviour {
         }
         else if (coll.gameObject.tag == "Player")
         {
+			scoreAdd.DecreaseScore(100);
 			//Decreases Adrenaline when hit.
 			adrenalineBar.Adrenaline -= 5f;
          
