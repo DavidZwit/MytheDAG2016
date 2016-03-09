@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class NavigateMenu : SavePlayerSettings
 {
@@ -34,7 +35,7 @@ public class NavigateMenu : SavePlayerSettings
     public void PlayGame()
     {
         //Laat hier nog een "Loading" plaatje zien
-        Application.LoadLevel(1);
+        SceneManager.LoadScene(1);
     }
 
     //Quits the game

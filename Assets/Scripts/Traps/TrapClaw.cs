@@ -4,12 +4,10 @@ using System.Collections;
 public class TrapClaw : MonoBehaviour
 {
     private bool canTrap = true;
-    private EventHandeler handeler;
     private PlayerMovement movement;
 
     void Awake()
     {
-        handeler = GameObject.Find("Handeler").GetComponent<EventHandeler>();
         movement = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
