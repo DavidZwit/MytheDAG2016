@@ -9,14 +9,12 @@ public class CurveShot : MonoBehaviour
 	[SerializeField] private float delayTime = 1f;
 	[SerializeField] private GameObject nozzle;
 	[SerializeField] private Transform projectile;      
-	private Transform myCatapult;
+
 
 	public bool _curveShootAnim = false;
 
 	void Awake()
 	{
-		myCatapult = transform; 
-
 		//With the invokeReapeat whe can shoot more then 1 projectile.
 		InvokeRepeating("CoroutineProjectile",1,5);
 

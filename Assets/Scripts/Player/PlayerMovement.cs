@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour
     private float speed;
     private float movementSpeed = 10f;
 
-    private bool Grounded = false;
+	//private bool Grounded = false;
     private float minSensitivity = 0.5f;
 
-    private float gravity = 40;
+    //private float gravity = 40;
 
     private Quaternion playerRotation;
     private float turnInput;

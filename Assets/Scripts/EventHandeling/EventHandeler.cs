@@ -17,7 +17,7 @@ public class EventHandeler : MonoBehaviour {
 
     void Awake()
     {
-		adrenalineBar = GameObject.Find("Image").GetComponent<AdrenalineBar> (); 
+		adrenalineBar = GameObject.Find("AdrenalineBar").GetComponent<AdrenalineBar> (); 
         scoreAdd = GetComponent<AddScore>();
         screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
     }
@@ -46,10 +46,10 @@ public class EventHandeler : MonoBehaviour {
 		adrenalineBar.Adrenaline++;
 
         if (coll.gameObject.name == "kasteel_model")
-            Application.LoadLevel(0);
+			SceneManager.LoadScene(0);
     }
 
-    public void BulletHitSomething(Collision coll)
+    public void BulletShitSomething(Collision coll)
     {
         if (coll.gameObject.tag == "Breakable")
         {
@@ -58,8 +58,9 @@ public class EventHandeler : MonoBehaviour {
         else if (coll.gameObject.tag == "Player")
         {
 			//Decreases Adrenaline when hit.
-			adrenalineBar.Adrenaline -= 5f;
-         
+			//adrenalineBar.Adrenaline -= 123;
+			adrenalineBar.DamageTaken ();
+			print ("Hit");
         }
     }
 
@@ -68,6 +69,7 @@ public class EventHandeler : MonoBehaviour {
 		//Decreases the adrenalineBar every few seconds.
 		adrenalineBar.Adrenaline -= 5f;
 
+		//If the adrenalineBar hits zero, load the following Scene.
 		if(adrenalineBar.Adrenaline <= 0f)
 		{
 			SceneManager.LoadScene ("StartMenu");
