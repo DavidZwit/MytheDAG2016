@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerAttack : MonoBehaviour {
+public class PlayerAttack : MonoBehaviour
+{
 
     GameObject throwableObj;
     EventHandeler handeler;
@@ -10,7 +11,7 @@ public class PlayerAttack : MonoBehaviour {
     bool canThrow = false;
     int hitRange = 3;
 
-	void Awake()
+    void Awake()
     {
         handeler = GameObject.Find("Handeler").GetComponent<EventHandeler>();
         projectile = GameObject.Find("Handeler").GetComponent<Projectile>();
@@ -18,25 +19,27 @@ public class PlayerAttack : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0))
+        {
             RaycastHit hit;
-            if (!canThrow) {
-<<<<<<< HEAD
-                if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y -1, transform.position.z), transform.forward), out hit, hitRange)) {
-=======
-                if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y -2.9f, transform.position.z), transform.forward), out hit, hitRange)) {
->>>>>>> 6ebfdbb8244ef058cea9cf79b23103e60811d40f
-                    if (hit.collider.gameObject.tag == "Breakable") {
+            if (!canThrow)
+            {
+                if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y - 2.9f, transform.position.z), transform.forward), out hit, hitRange))
+                {
+                    if (hit.collider.gameObject.tag == "Breakable")
+                    {
                         handeler.SomethingBroke(hit.collider.gameObject);
                     }
-                    else if (hit.collider.gameObject.tag == "Throwable") {
+                    else if (hit.collider.gameObject.tag == "Throwable")
+                    {
                         canThrow = true;
                         throwableObj = hit.collider.gameObject;
                         projectile.PickupProjectile(throwableObj);
                     }
                 }
             }
-            else {
+            else
+            {
                 projectile.ShootProjectile(throwableObj);
                 canThrow = false;
             }

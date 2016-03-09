@@ -1,58 +1,56 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
-public class EventHandeler : MonoBehaviour {
-<<<<<<< HEAD
-    
-=======
-	
->>>>>>> 6ebfdbb8244ef058cea9cf79b23103e60811d40f
+public class EventHandeler : MonoBehaviour
+{
+
     RandomShake screenShake;
 
-    private Transform player;
     public delegate void ReachedObjective();
     public static event ReachedObjective _ObjectiveReached;
 
-	AdrenalineBar adrenalineBar;
+    AdrenalineBar adrenalineBar;
     AddScore scoreAdd;
-    [SerializeField] [Range(0, 100)]
+    [SerializeField]
+    [Range(0, 100)]
     int perCentWonCodition;
     float brokenObjectsNeededLeft, breakableObjects = 0;
 
     void Awake()
     {
-		adrenalineBar = GameObject.Find("Image").GetComponent<AdrenalineBar> (); 
+        adrenalineBar = GameObject.Find("Image").GetComponent<AdrenalineBar>();
         scoreAdd = GetComponent<AddScore>();
         screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
-        player = GameObject.Find("Player").GetComponent<Transform>();
     }
 
     void Start()
     {
-		InvokeRepeating ("AdrenalineBarDecreasing" ,1 ,2);
+        InvokeRepeating("AdrenalineBarDecreasing", 1, 2);
         brokenObjectsNeededLeft = (breakableObjects / 100) * Mathf.Abs(perCentWonCodition - 100);
     }
 
     public float BreakableObjects
     {
         get { return breakableObjects; }
-        set { breakableObjects = value;
+        set
+        {
+            breakableObjects = value;
             if (breakableObjects < brokenObjectsNeededLeft) _ObjectiveReached();
         }
     }
 
-	public void SomethingBroke(GameObject coll)
+    public void SomethingBroke(GameObject coll)
     {
         scoreAdd.IncreaseScore(100);
         screenShake.Shake(new Vector2(0.5f, 0.3f), 0.8f, 0.01f);
         coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
 
-		//Adds Adrenaline
-		adrenalineBar.Adrenaline++;
+        //Adds Adrenaline
+        adrenalineBar.Adrenaline++;
 
         if (coll.gameObject.name == "kasteel_model")
-            Application.LoadLevel(0);
+            SceneManager.LoadScene(0);
     }
 
     public void BulletHitSomething(Collision coll)
@@ -63,47 +61,22 @@ public class EventHandeler : MonoBehaviour {
         }
         else if (coll.gameObject.tag == "Player")
         {
-<<<<<<< HEAD
             scoreAdd.DecreaseScore(100);
-            //remove adrealine
+            //Decreases Adrenaline when hit.
+            adrenalineBar.Adrenaline -= 5f;
+
         }
     }
 
-    public void PickupProjectile(GameObject coll)
+    void AdrenalineBarDecreasing()
     {
-        Rigidbody rb = coll.GetComponent<Rigidbody>();
-        coll.transform.parent = player;
-        rb.isKinematic = true;
-        rb.useGravity = false;
-        rb.position = new Vector3(player.position.x, player.position.y + 3, player.position.z);
-    }
+        //Decreases the adrenalineBar every few seconds.
+        adrenalineBar.Adrenaline -= 5f;
 
-    public void ShootProjectile(GameObject coll)
-    {
-        Rigidbody rb = coll.GetComponent<Rigidbody>();
-        rb.isKinematic = false;
-        rb.useGravity = true;
-        coll.transform.parent = null;
-        rb.AddForce(transform.forward * 2500);
-    }
-=======
-			scoreAdd.DecreaseScore(100);
-			//Decreases Adrenaline when hit.
-			adrenalineBar.Adrenaline -= 5f;
-         
+        if (adrenalineBar.Adrenaline <= 0f)
+        {
+            SceneManager.LoadScene ("StartMenu");
         }
+
     }
-
-	void AdrenalineBarDecreasing()
-	{
-		//Decreases the adrenalineBar every few seconds.
-		adrenalineBar.Adrenaline -= 5f;
-
-		if(adrenalineBar.Adrenaline <= 0f)
-		{
-			//SceneManager.LoadScene ("StartMenu");
-		}
-
-	}
->>>>>>> 6ebfdbb8244ef058cea9cf79b23103e60811d40f
 }
