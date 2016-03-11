@@ -9,14 +9,15 @@ public class CurveShot : MonoBehaviour
 	[SerializeField] private float delayTime = 1f;
 	[SerializeField] private GameObject nozzle;
 	[SerializeField] private Transform projectile;      
-
+	RandomShake screenShake;
 
 	public bool _curveShootAnim = false;
 
 	void Awake()
 	{
-		//With the invokeReapeat whe can shoot more then 1 projectile.
+		//With the invokeReapeat the catapult can shoot more then 1 projectile.
 		InvokeRepeating("CoroutineProjectile",1,5);
+		screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
 
 	}
 	
@@ -29,10 +30,12 @@ public class CurveShot : MonoBehaviour
 
 	IEnumerator SimulateProjectile()
 	{
-		//print ("IEnumerator ON");
+		projectile.position = new Vector3 (projectile.position.x, projectile.position.y, projectile.position.z);
 
 		// Short delay added before Projectile is thrown.
 		yield return new WaitForSeconds(delayTime);
+
+		SoundManager.PlayAudio (0,1);
 
 		//Sets the Catapult Animation True
 		_curveShootAnim = true;
@@ -55,10 +58,7 @@ public class CurveShot : MonoBehaviour
 		// Rotate projectile to face the target.
 		projectile.rotation = Quaternion.LookRotation(target.position - projectile.position);
 
-
-
 		float elapseTime = 0;
-
 
 		while (elapseTime < flightDuration)
 		{
@@ -68,15 +68,15 @@ public class CurveShot : MonoBehaviour
 			
 			elapseTime += Time.deltaTime;
 			
-			//print ("Projectile Is Flying!");
-			
 			yield return null;
 		}
+
+		projectile.position = new Vector3 (projectile.position.x, 0 , projectile.position.z);
+		screenShake.Shake(new Vector2(0.5f, 0.3f), 0.5f, 0.05f);
 
 		//Sets the Catapult Animation false
 		_curveShootAnim = false;
 
-		//print ("Projectile Landed");	
 	}
 
 

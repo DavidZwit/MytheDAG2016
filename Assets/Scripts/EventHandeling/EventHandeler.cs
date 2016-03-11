@@ -54,13 +54,13 @@ public class EventHandeler : MonoBehaviour {
         if (coll.gameObject.tag == "Breakable")
         {
             coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
+			SoundManager.PlayAudio (1,1);
         }
         else if (coll.gameObject.tag == "Player")
         {
 			//Decreases Adrenaline when hit.
-			//adrenalineBar.Adrenaline -= 123;
 			adrenalineBar.DamageTaken ();
-			print ("Hit");
+			//For the effect of the hit
         }
     }
 

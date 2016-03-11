@@ -56,8 +56,8 @@ public class AdrenalineBar : MonoBehaviour {
 
 	public void DamageTaken()
 	{
+		//Player Takes Damage from projectile
 		adrenaline -= damageTaken;
-		print ("test bitch");
 	}
 		
 }
