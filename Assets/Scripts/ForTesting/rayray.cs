@@ -12,7 +12,7 @@ public class rayray : MonoBehaviour {
     [SerializeField]
     private Transform cube;
 
-	void Update () {
+	void FixedUpdate () {
         
         if(Input.GetButton("Fire1"))
         {
@@ -21,12 +21,13 @@ public class rayray : MonoBehaviour {
             {
                 fireRange = maxFireRange;
             }
-            print(fireRange);
+            //print(fireRange);
         }
         else
         {
             fireRange = 0;
             cube.position = transform.position;
+            //print("testing");
         }
 
         checkhit = false;
@@ -37,7 +38,7 @@ public class rayray : MonoBehaviour {
 
         if(checkhit)
         {
-            print(hit);
+            //print(hit);
             cube.position = hit.point;
             cube.rotation = Quaternion.LookRotation(hit.normal);
         }
