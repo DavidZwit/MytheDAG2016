@@ -12,18 +12,23 @@ public enum StateID
     Patrol = 5
 }
 
-public class Guard : MonoBehaviour {
+public class Guard : LivingEntity
+{
 
-	/** we declareren de statemachine */
-	private StateMachine stateMachine;
+    /** we declareren de statemachine */
+    private StateMachine stateMachine;
 
     [SerializeField]
     private bool patrol;
 
-	// Use this for initialization
-	void Start () {
-		/** we halen een referentie op naar de state machine */
-		stateMachine = GetComponent<StateMachine>();
+    // Use this for initialization
+    protected override void Start()
+    {
+        base.Start();//gets the start from living entity
+        //_startingHealth = _baseHp;
+        //print(health + "hp");
+        /** we halen een referentie op naar de state machine */
+        stateMachine = GetComponent<StateMachine>();
 
 		/** we voegen de verschillende states toe aan de state machine */
 		MakeStates();
@@ -37,9 +42,15 @@ public class Guard : MonoBehaviour {
         {
             stateMachine.SetState(StateID.Patrol);
         }
+
     }
-	
-	void MakeStates() {
+
+    protected override void death()
+    {
+        base.death();//gets the death from living entity
+    }
+
+    void MakeStates() {
 		stateMachine.AddState( StateID.Alerting, GetComponent<AlertState>() );
 		stateMachine.AddState( StateID.Wandering, GetComponent<WanderState>() );
 		stateMachine.AddState( StateID.Fleeing, GetComponent<FleeState>() );

@@ -62,23 +62,38 @@ public class PatrolState : State {
             if (distanceFromPlayer < sightDistancePow)
             {
                 enemySpotted = true;
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, sightDistance * 0.66f);
+                int i = 0;
+                while (i < hitColliders.Length)
+                {
+                    State otherEntity = hitColliders[i].GetComponent<State>();
+                    if (otherEntity != null)
+                    {
+                        otherEntity._alertedByOther = true;
+                    }
+                    i++;
+                }
             }
             yield return new WaitForSeconds(0.5f);
         }
     }
     public override void Act()
     {
+        base.Act();
 
     }
 
     public override void Reason()
     {
-        if(enemySpotted)
+        //print(_alertedByOther);
+        if(enemySpotted || _alertedByOther)
         {
+            if (_alertedByOther)
+                print("welp dis works");
             print("enemy!");
             StopCoroutine("toPoint");
             StopCoroutine("seeEnemy");
-            GetComponent<StateMachine>().SetState(StateID.Alerting);
+            GetComponent<StateMachine>().SetState(StateID.Charge);
         }
     }
 }

@@ -24,28 +24,72 @@ public class ChargeState : State
         {
             agent.SetDestination(_player.transform.position);
             distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
-            if (distanceFromPlayer < 3)
+            if (distanceFromPlayer < 20)
             {
                 agent.speed = 0;
-                attack();
+                //attack();
+                //StartCoroutine("attack");
             }
             else
             {
                 print("speed = "+ originalSpeed);
                 agent.speed = originalSpeed;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
-    private void attack()
+    /*IEnumerator attack()
     {
+        StopCoroutine("charge");
+        Vector3 originalPosition = transform.position;
+        Vector3 dirToTarget = (_player.transform.position - transform.position).normalized;
+        Vector3 attackPosition = _player.transform.position - dirToTarget * (1);
 
+        float attackSpeed = 3;
+        float percent = 0;
+
+        bool hasAppliedDamage = false;
+
+        while (percent <= 1)
+        {
+
+            if (percent >= .5f && !hasAppliedDamage)
+            {
+                hasAppliedDamage = true;
+                //targetEntity.TakeDamage(damage);
+            }
+
+            percent += Time.deltaTime * attackSpeed;
+            float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
+            transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
+
+            StartCoroutine("charge");
+            yield return null;
+        }
     }
+
+    /*IEnumerator UpdatePath()
+    {
+        float refreshRate = .25f;
+
+        while (_targetAlive)
+        {
+            if (currentState == State.Chasing)
+            {
+                Vector3 dirToTarget = (_player.transform.position - transform.position).normalized;
+                Vector3 targetPosition = _player.transform.position - dirToTarget * (myCollisionRadius + targetCollisionRadius + attackDistanceThreshold / 2);
+                agent.SetDestination(_player.transform.position);
+
+            }
+            yield return new WaitForSeconds(refreshRate);
+        }
+    }*/
 
     public override void Act()
     {
-        
+        base.Act();
+
     }
 
     public override void Reason()
