@@ -1,31 +1,28 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class OptionTextureRes : MonoBehaviour
 {
-    public Dropdown dropdownTextureResolition;
+    public int _textureResValue;
 
-    void Update()
+    public void TextureResChanged(int value)
     {
-        if (dropdownTextureResolition.value == 0)
-        {
+        _textureResValue = value;
+
+        //Very Low
+        if (value == 0)
             QualitySettings.masterTextureLimit = 3;
-        }
 
-        else if (dropdownTextureResolition.value == 1)
-        {
+        //Low
+        else if (value == 1)
             QualitySettings.masterTextureLimit = 2;
-        }
 
-        else if (dropdownTextureResolition.value == 2)
-        {
+        //Medium
+        else if (value == 2)
             QualitySettings.masterTextureLimit = 1;
-        }
 
-        else if (dropdownTextureResolition.value == 3)
-        {
+        //High
+        else if (value == 3)
             QualitySettings.masterTextureLimit = 0;
-        }
     }
 }

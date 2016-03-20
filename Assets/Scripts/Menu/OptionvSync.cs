@@ -1,23 +1,20 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class OptionvSync : MonoBehaviour
 {
-    public Dropdown _dropdownvSync;
+    public int _vSyncValue;
 
-    void Update()
+    public void VsyncChanged(int value)
     {
-        //If toggled on; vSync is enabled
-        if (_dropdownvSync.value == 0)
-        {
-            QualitySettings.vSyncCount = 1;
-        }
+        _vSyncValue = value;
 
-        //If toggled off; vSync is disabled
-        else if (_dropdownvSync.value == 1)
-        {
+        //vSync is enabled
+        if (value == 0)
+            QualitySettings.vSyncCount = 1;
+
+        //vSync is disabled
+        else if (value == 1)
             QualitySettings.vSyncCount = 0;
-        }
     }
 }

@@ -8,6 +8,8 @@ public class EventHandeler : MonoBehaviour
     RandomShake screenShake;
 
     public delegate void ReachedObjective();
+    public delegate void BuildingBroke(GameObject building);
+    public static event BuildingBroke _buildingBroke;
     public static event ReachedObjective _ObjectiveReached;
 
     AdrenalineBar adrenalineBar;
@@ -42,10 +44,13 @@ public class EventHandeler : MonoBehaviour
 
     public void SomethingBroke(GameObject coll)
     {
+        if (_buildingBroke != null)
+            _buildingBroke(coll);
+
         scoreAdd.IncreaseScore(100);
         screenShake.Shake(new Vector2(0.5f, 0.3f), 0.8f, 0.01f);
         coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
-
+        
         //Adds Adrenaline
         adrenalineBar.Adrenaline++;
 
@@ -68,6 +73,11 @@ public class EventHandeler : MonoBehaviour
         }
     }
 
+    public void QuestStatus()
+    {
+
+    }
+
     void AdrenalineBarDecreasing()
     {
         //Decreases the adrenalineBar every few seconds.
@@ -75,7 +85,7 @@ public class EventHandeler : MonoBehaviour
 
         if (adrenalineBar.Adrenaline <= 0f)
         {
-            SceneManager.LoadScene ("StartMenu");
+            SceneManager.LoadScene ("MainMenu");
         }
 
     }

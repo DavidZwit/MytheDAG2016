@@ -12,11 +12,13 @@ public class AddScore : MonoBehaviour
    
     public void IncreaseScore(int score)
     {
+        //Can be called to add score
         scoreCount._ScoreCounter += score;
     }
 
     public void DecreaseScore(int score)
     {
+        //Can be called to remove score
         scoreCount._ScoreCounter -= score;
     }
 }

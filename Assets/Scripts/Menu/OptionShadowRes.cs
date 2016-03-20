@@ -1,26 +1,24 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class OptionShadowRes : MonoBehaviour
 {
-    public Dropdown dropdownShadowResolition;
+    public int _shadowResValue;
 
-	void Update ()
+    public void ShadowResChanged (int value)
     {
-        if (dropdownShadowResolition.value == 0)
-        {
+        _shadowResValue = value;
+
+        //Low
+        if (value == 0)
             QualitySettings.SetQualityLevel(6, false);
-        }
 
-        else if (dropdownShadowResolition.value == 1)
-        {
+        //Medium
+        else if (value == 1)
             QualitySettings.SetQualityLevel(7, false);
-        }
 
-        else if (dropdownShadowResolition.value == 2)
-        {
+        //High
+        else if (value == 2)
             QualitySettings.SetQualityLevel(8, false);
-        }
     }
 }
