@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class OptionShadowRes : MonoBehaviour
 {
-    public int _shadowResValue;
+    private Dropdown dropDown;
+    [HideInInspector] public int _shadowResValue;
+
+    void Awake()
+    {
+        dropDown = GetComponent<Dropdown>();
+        dropDown.value = _shadowResValue;
+    }
 
     public void ShadowResChanged (int value)
     {

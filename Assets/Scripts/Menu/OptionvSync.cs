@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class OptionvSync : MonoBehaviour
 {
-    public int _vSyncValue;
+    private Dropdown dropDown;
+    [HideInInspector] public int _vSyncValue;
+
+    void Awake()
+    {
+        dropDown = GetComponent<Dropdown>();
+        dropDown.value = _vSyncValue;
+    }
 
     public void VsyncChanged(int value)
     {

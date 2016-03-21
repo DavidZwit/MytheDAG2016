@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class OptionAF : MonoBehaviour
 {
-    public int _afValue;
+    private Dropdown dropDown;
+    [HideInInspector] public int _afValue;
+
+    void Awake()
+    {
+        dropDown = GetComponent<Dropdown>();
+        dropDown.value = _afValue;
+    }
 
     public void AFChanged (int value)
     {

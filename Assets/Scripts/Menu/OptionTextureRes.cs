@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class OptionTextureRes : MonoBehaviour
 {
-    public int _textureResValue;
+    private Dropdown dropDown;
+    [HideInInspector] public int _textureResValue;
+
+    void Awake()
+    {
+        dropDown = GetComponent<Dropdown>();
+        dropDown.value = _textureResValue;
+    }
 
     public void TextureResChanged(int value)
     {

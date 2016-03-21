@@ -31,15 +31,8 @@ public class SavePlayerSettings : MonoBehaviour
         optionvSync = GameObject.Find("DropdownvSync").GetComponent<OptionvSync>();
         optionAF = GameObject.Find("DropdownAF").GetComponent<OptionAF>();
         optionAA = GameObject.Find("DropdownAA").GetComponent<OptionAA>();
-    }
 
-    void Update()
-    {
-
-        if (PlayerPrefs.HasKey("TextureResValue"))
-            print("We have a Save!");
-        else
-            print("NO SAVE!");
+        LoadSettings();
     }
 
     public void SaveSettings()
@@ -56,7 +49,6 @@ public class SavePlayerSettings : MonoBehaviour
         PlayerPrefs.SetInt("DropdownvSync", vsyncValue);
         PlayerPrefs.SetInt("AFValue", afValue);
         PlayerPrefs.SetInt("AAValue", aaValue);
-        print("I Just Saved!");
     }
 
     public void LoadSettings()
@@ -73,6 +65,5 @@ public class SavePlayerSettings : MonoBehaviour
         optionvSync._vSyncValue = vsyncValue;
         optionAF._afValue = afValue;
         optionAA._aaValue = aaValue;
-        print("I Just Loaded!");
     }
 }

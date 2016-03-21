@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class OptionShadowDist : MonoBehaviour
 {
-    public int _shadowDistValue;
+    private Dropdown dropDown;
+    [HideInInspector] public int _shadowDistValue;
+
+    void Awake()
+    {
+        dropDown = GetComponent<Dropdown>();
+        dropDown.value = _shadowDistValue;
+    }
 
     public void ShadowDistanceChanged(int value)
     {

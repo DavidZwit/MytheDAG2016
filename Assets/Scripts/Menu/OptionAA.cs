@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class OptionAA : MonoBehaviour
 {
-    public int _aaValue;
+    private Dropdown dropDown;
+    [HideInInspector] public int _aaValue;
+
+    void Awake()
+    {
+        dropDown = GetComponent<Dropdown>();
+        dropDown.value = _aaValue;
+    }
 
     public void AAChanged(int value)
     {
