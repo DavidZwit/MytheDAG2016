@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
     void Movement(float h, float v)
     {
         movementVector = v * Vector3.forward;
-        Debug.Log(v * Vector3.forward + h * Vector3.right);
+        //Debug.Log(v * Vector3.forward + h * Vector3.right);
         if (Horizontal != 0f || Vertical != 0f)
         {
             // ... set the players rotation and set the speed parameter to 5.3f.

@@ -33,7 +33,7 @@ public class rayray : MonoBehaviour {
 	}
     void OnHitObject(RaycastHit hit)//this wil take in information abbout the object hit
     {
-        print("test m8");
+        //print("test m8");
         IDamageable damageableObject = hit.collider.GetComponent<IDamageable>();//check for component idamagable on the hit object
         if (damageableObject != null)//"if object has idamagable"
         {

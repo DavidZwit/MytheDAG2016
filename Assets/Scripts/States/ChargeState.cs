@@ -6,7 +6,7 @@ public class ChargeState : State
     private NavMeshAgent agent;
 
     private float originalSpeed;
-
+    private float performaceTimer;
     private float distanceFromPlayer;
     
     public override void Enter()
@@ -26,16 +26,18 @@ public class ChargeState : State
             distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
             if (distanceFromPlayer < 20)
             {
+                performaceTimer = 0.3f;
                 agent.speed = 0;
                 //attack();
                 //StartCoroutine("attack");
             }
             else
             {
-                print("speed = "+ originalSpeed);
+                //print("speed = "+ originalSpeed);
                 agent.speed = originalSpeed;
+                performaceTimer = 1;
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(performaceTimer);
         }
     }
 

@@ -20,6 +20,8 @@ public class Guard : LivingEntity
 
     [SerializeField]
     private bool patrol;
+    [SerializeField]
+    private bool charge;
 
     // Use this for initialization
     protected override void Start()
@@ -34,13 +36,17 @@ public class Guard : LivingEntity
 		MakeStates();
 
         /** we geven de eerste state door (rondlopen) */
-        if (!patrol)
+        if (patrol)
         {
-            stateMachine.SetState(StateID.Wandering);
+            stateMachine.SetState(StateID.Patrol);
+        }
+        else if(charge)
+        {
+            stateMachine.SetState(StateID.Charge);
         }
         else
         {
-            stateMachine.SetState(StateID.Patrol);
+            stateMachine.SetState(StateID.Wandering);
         }
 
     }
