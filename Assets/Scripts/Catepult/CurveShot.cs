@@ -72,7 +72,7 @@ public class CurveShot : MonoBehaviour
 		}
 
 		projectile.position = new Vector3 (projectile.position.x, 0 , projectile.position.z);
-		screenShake.Shake(new Vector2(0.2f, 0.2f), 0.2f, 0.01f);
+		//screenShake.Shake(new Vector2(0.2f, 0.2f), 0.2f, 0.01f);
 
 		//Sets the Catapult Animation false
 		_curveShootAnim = false;
