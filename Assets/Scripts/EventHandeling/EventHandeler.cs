@@ -56,7 +56,7 @@ public class EventHandeler : MonoBehaviour {
 			SceneManager.LoadScene(0);
     }
 
-    public void BulletShitSomething(Collision coll)
+    public void BulletHitSomething(Collision coll)
     {
         if (coll.gameObject.tag == "Breakable")
         {
