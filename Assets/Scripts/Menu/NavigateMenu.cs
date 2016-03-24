@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class NavigateMenu : MonoBehaviour
+public class NavigateMenu : SavePlayerSettings
 {
     private GameObject buttonMenu;
     private GameObject optionMenu;
@@ -10,6 +11,8 @@ public class NavigateMenu : MonoBehaviour
     {
         buttonMenu = GameObject.Find("ButtonMenu");
         optionMenu = GameObject.Find("OptionMenu");
+
+        LoadSettings();
 
         optionMenu.SetActive(false);
     }
@@ -32,7 +35,7 @@ public class NavigateMenu : MonoBehaviour
     public void PlayGame()
     {
         //Laat hier nog een "Loading" plaatje zien
-        Application.LoadLevel(1);
+        SceneManager.LoadScene(1);
     }
 
     //Quits the game

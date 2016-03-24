@@ -6,7 +6,7 @@ public class ChargeState : State
     private NavMeshAgent agent;
 
     private float originalSpeed;
-
+    private float performaceTimer;
     private float distanceFromPlayer;
     
     public override void Enter()
@@ -15,7 +15,7 @@ public class ChargeState : State
         agent = GetComponent<NavMeshAgent>();
         StartCoroutine("charge");
         originalSpeed = 10;
-        print(agent.speed);
+        //print(agent.speed);
     }
 
     IEnumerator charge()
@@ -27,19 +27,25 @@ public class ChargeState : State
             if (distanceFromPlayer < 20)
             {
                 agent.speed = 0;
+            }
+            if (distanceFromPlayer < 200)
+            {
+                agent.speed = originalSpeed + 2;
+                performaceTimer = 0.3f;
                 //attack();
-                //StartCoroutine("attack");
+                StartCoroutine("attack");
             }
             else
             {
-                print("speed = "+ originalSpeed);
+                //print("speed = "+ originalSpeed);
                 agent.speed = originalSpeed;
+                performaceTimer = 1;
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(performaceTimer);
         }
     }
 
-    /*IEnumerator attack()
+    IEnumerator attack()
     {
         StopCoroutine("charge");
         Vector3 originalPosition = transform.position;
@@ -47,7 +53,7 @@ public class ChargeState : State
         Vector3 attackPosition = _player.transform.position - dirToTarget * (1);
 
         float attackSpeed = 3;
-        float percent = 0;
+        float percent = 0.1f;
 
         bool hasAppliedDamage = false;
 
@@ -65,7 +71,7 @@ public class ChargeState : State
             transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
 
             StartCoroutine("charge");
-            yield return null;
+            yield return new WaitForSeconds(performaceTimer); ;
         }
     }
 

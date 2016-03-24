@@ -30,10 +30,10 @@ ModelImporter:
     4300004: leg_l
     4300006: arm_l
     4300008: arm_r
-    7400000: Run
-    7400002: throw
-    7400004: david_smack
-    7400006: Kick
+    7400000: Goliath_Walk
+    7400002: Goliath_Smash
+    7400004: Goliath_Kick
+    7400006: Goliath_Idle
     7400008: Fire Breathing
     7400010: Idle
     9500000: //RootNode
@@ -59,10 +59,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run
+      name: Goliath_Walk
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 44
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -97,7 +97,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: throw
+      name: Goliath_Smash
       takeName: Take 001
       firstFrame: 44
       lastFrame: 65
@@ -135,45 +135,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: david_smack
-      takeName: Take 001
-      firstFrame: 44
-      lastFrame: 65
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: arm_l
-        weight: 1
-      - path: arm_r
-        weight: 1
-      - path: leg_l
-        weight: 1
-      - path: leg_r
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
-    - serializedVersion: 16
-      name: Kick
+      name: Goliath_Kick
       takeName: Take 001
       firstFrame: 65
       lastFrame: 90
@@ -211,48 +173,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: Fire Breathing
+      name: Goliath_Idle
       takeName: Take 001
-      firstFrame: 90
-      lastFrame: 120
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: arm_l
-        weight: 1
-      - path: arm_r
-        weight: 1
-      - path: leg_l
-        weight: 1
-      - path: leg_r
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
-    - serializedVersion: 16
-      name: Idle
-      takeName: Take 001
-      firstFrame: 44
-      lastFrame: 44
+      firstFrame: 65
+      lastFrame: 66
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -289,7 +213,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 150
+    globalScale: 57
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

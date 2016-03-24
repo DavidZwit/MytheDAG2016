@@ -37,6 +37,7 @@ public class CatapultAnim : MonoBehaviour {
 
 	void DeathAnimation()
 	{
+
 		/*
 		 * Space for death animation!
 		 * 
