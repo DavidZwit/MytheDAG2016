@@ -17,7 +17,7 @@ public class Guard : LivingEntity
 
     /** we declareren de statemachine */
     private StateMachine stateMachine;
-
+    private Animator anim;
     [SerializeField]
     private bool patrol;
     [SerializeField]
@@ -54,6 +54,7 @@ public class Guard : LivingEntity
     protected override void death()
     {
         base.death();//gets the death from living entity
+        anim.SetBool("alive", false);
     }
 
     void MakeStates() {

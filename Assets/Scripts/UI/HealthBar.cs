@@ -12,7 +12,10 @@ public class HealthBar : MonoBehaviour {
 	[SerializeField] private float healthHitPoints = 10f;
 	[SerializeField] private float smoothTime = 0.1f;
 	[SerializeField] private float damageTaken = 10f;
-	private float velocity;
+
+
+    private State enemyDamg;//the enemy that gets spawned
+    private float velocity;
 
 	void Start() 
 	{
@@ -54,10 +57,12 @@ public class HealthBar : MonoBehaviour {
 		//updates the adrenaline bar smooth when the points go up or down.
 		float newX = Mathf.SmoothDamp (transform.localScale.x, health/50 - 0.02f, ref velocity, smoothTime);
 		transform.localScale = new Vector3 (newX, transform.localScale.y, transform.localScale.z);
+        enemyDamg._onDamage += HealthDamageTaken;
 	}
 
 	public void HealthDamageTaken()
 	{
+        print("try me bitch");
 		//Player Takes Damage from projectile
 		health -= damageTaken;
 	}
