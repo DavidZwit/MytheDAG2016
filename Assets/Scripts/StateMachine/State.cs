@@ -2,12 +2,17 @@
 using System.Collections;
 
 public abstract class State : MonoBehaviour {
+
+    [HideInInspector]
+    public event System.Action _onDamage;
     [HideInInspector]
     protected GameObject _player;
     [HideInInspector]
     public bool _alertedByOther;
     [HideInInspector]
     protected bool _targetAlive;
+    [HideInInspector]
+    protected Animator _anim;
 
 
     public virtual void Enter ()
@@ -16,6 +21,7 @@ public abstract class State : MonoBehaviour {
         _alertedByOther = false;
         if (_player != null)
             _targetAlive = true;
+        _anim = GetComponent<Animator>();
     }
 
 	public virtual void Leave ()
@@ -34,7 +40,13 @@ public abstract class State : MonoBehaviour {
         }
     }
 
-	public abstract void Reason ();
+    virtual protected void doDamage()//when would this be used >_>
+    {
+        if (_onDamage != null)
+            _onDamage();
+    }
+
+    public abstract void Reason ();
 
     public float calcDistanceSqrt(Vector3 otherTransform, Vector3 ownTransform)
     {

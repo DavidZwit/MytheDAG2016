@@ -5,45 +5,57 @@ public class ChargeState : State
 {
     private NavMeshAgent agent;
 
+    private bool atackMove;
+    [SerializeField]
     private float originalSpeed;
     private float performaceTimer;
     private float distanceFromPlayer;
-    
+
+
+
     public override void Enter()
     {
         base.Enter();
         agent = GetComponent<NavMeshAgent>();
         StartCoroutine("charge");
         originalSpeed = 10;
-        print(agent.speed);
+        atackMove = false;
+        //print(agent.speed);
     }
 
     IEnumerator charge()
     {
         while (true)
         {
-            agent.SetDestination(_player.transform.position);
-            distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
-            if (distanceFromPlayer < 20)
+            if (!atackMove)
             {
-                performaceTimer = 0.3f;
-                agent.speed = 0;
-                //attack();
-                //StartCoroutine("attack");
-            }
-            else
-            {
-                //print("speed = "+ originalSpeed);
-                agent.speed = originalSpeed;
-                performaceTimer = 1;
+                agent.SetDestination(_player.transform.position);
+                distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
+                if (distanceFromPlayer < 20)
+                {
+                    atackMove = true;
+                    _anim.SetBool("attacking", atackMove);
+                    StartCoroutine("attack");
+                }
+                else if (distanceFromPlayer < 200)
+                {
+                    agent.speed = originalSpeed + 2;
+                    _anim.SetFloat("speed", 1.2f);
+                    performaceTimer = 0.2f;
+                }
+                else
+                {
+                    agent.speed = originalSpeed;
+                    _anim.SetFloat("speed", 1f);
+                    performaceTimer = 1;
+                }
             }
             yield return new WaitForSeconds(performaceTimer);
         }
     }
 
-    /*IEnumerator attack()
+    IEnumerator attack()
     {
-        StopCoroutine("charge");
         Vector3 originalPosition = transform.position;
         Vector3 dirToTarget = (_player.transform.position - transform.position).normalized;
         Vector3 attackPosition = _player.transform.position - dirToTarget * (1);
@@ -59,35 +71,24 @@ public class ChargeState : State
             if (percent >= .5f && !hasAppliedDamage)
             {
                 hasAppliedDamage = true;
-                //targetEntity.TakeDamage(damage);
+                doDamage();
+                //_player.TakeDamage(damage);
             }
 
             percent += Time.deltaTime * attackSpeed;
             float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
             transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
 
-            StartCoroutine("charge");
             yield return null;
         }
+        atackMove = false;
+        _anim.SetBool("attacking", atackMove);
     }
-
-    /*IEnumerator UpdatePath()
+    protected override void doDamage()
     {
-        float refreshRate = .25f;
-
-        while (_targetAlive)
-        {
-            if (currentState == State.Chasing)
-            {
-                Vector3 dirToTarget = (_player.transform.position - transform.position).normalized;
-                Vector3 targetPosition = _player.transform.position - dirToTarget * (myCollisionRadius + targetCollisionRadius + attackDistanceThreshold / 2);
-                agent.SetDestination(_player.transform.position);
-
-            }
-            yield return new WaitForSeconds(refreshRate);
-        }
-    }*/
-
+        base.doDamage();
+        print("god help me");
+    }
     public override void Act()
     {
         base.Act();

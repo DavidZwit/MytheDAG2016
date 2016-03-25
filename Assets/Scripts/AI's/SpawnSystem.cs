@@ -84,12 +84,13 @@ public class SpawnSystem : MonoBehaviour {
     }
     void spawnCheck()
     {
+        //print(enemiesToSpawn);
         if (enemiesToSpawn > 0 && Time.time > nextSpawnTime)//checks if there are enemies left to spawn this wave and if it is time to spawn a enemy, if it executes it ajusts the amount of enemies that need to spawn, resets the timer and spawns a enemy
         {
             enemiesToSpawn--;
             nextSpawnTime = Time.time + currentWave.spawnTime;
 
-            
+            //print("ello" + enemy);
             if (_112233)//functie die er voor zorgt dat als 112233 true is dat de eerste eerst worden gespawned dan de 2e en dan de 3e
             {
                 if(currentWave.enemyCount1 != 0)

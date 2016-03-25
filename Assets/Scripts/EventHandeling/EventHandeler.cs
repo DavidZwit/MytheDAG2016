@@ -9,7 +9,9 @@ public class EventHandeler : MonoBehaviour {
     public delegate void ReachedObjective();
     public static event ReachedObjective _ObjectiveReached;
 
-	AdrenalineBar adrenalineBar;
+	//AdrenalineBar adrenalineBar;
+	RampageBar rampageBar;
+	HealthBar healthBar;
     AddScore scoreAdd;
     [SerializeField] [Range(0, 100)]
     int perCentWonCodition;
@@ -17,14 +19,17 @@ public class EventHandeler : MonoBehaviour {
 
     void Awake()
     {
-		adrenalineBar = GameObject.Find("Image").GetComponent<AdrenalineBar> (); 
+		//adrenalineBar = GameObject.Find("AdrenalineBar").GetComponent<AdrenalineBar> (); 
+		rampageBar = GameObject.Find("RampageBar").GetComponent<RampageBar> (); 
+		healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar> (); 
         scoreAdd = GetComponent<AddScore>();
         screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
     }
 
     void Start()
     {
-		InvokeRepeating ("AdrenalineBarDecreasing" ,1 ,2);
+		//InvokeRepeating ("AdrenalineBarDecreasing" ,0.1f ,0.1f);
+		InvokeRepeating ("RampageAndHealthBarDecreasing" ,0.1f ,0.1f);
         brokenObjectsNeededLeft = (breakableObjects / 100) * Mathf.Abs(perCentWonCodition - 100);
     }
 
@@ -43,10 +48,12 @@ public class EventHandeler : MonoBehaviour {
         coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
 
 		//Adds Adrenaline
-		adrenalineBar.Adrenaline++;
+		//adrenalineBar.Adrenaline++;
+
+		rampageBar.Rampage++;
 
         if (coll.gameObject.name == "kasteel_model")
-            SceneManager.LoadScene(0);
+			SceneManager.LoadScene(0);
     }
 
     public void BulletHitSomething(Collision coll)
@@ -54,25 +61,54 @@ public class EventHandeler : MonoBehaviour {
         if (coll.gameObject.tag == "Breakable")
         {
             coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
+			SoundManager.PlayAudio (1,1);
         }
         else if (coll.gameObject.tag == "Player")
         {
-			scoreAdd.DecreaseScore(100);
 			//Decreases Adrenaline when hit.
-			adrenalineBar.Adrenaline -= 5f;
-         
+			//adrenalineBar.DamageTaken ();
+
+			rampageBar.RampageDamageTaken ();
+
+			healthBar.HealthDamageTaken ();
+
+			//For the effect of the hit
         }
     }
 
+	/*
 	void AdrenalineBarDecreasing()
 	{
 		//Decreases the adrenalineBar every few seconds.
 		adrenalineBar.Adrenaline -= 5f;
 
+		//If the adrenalineBar hits zero, load the following Scene.
 		if(adrenalineBar.Adrenaline <= 0f)
 		{
-			SceneManager.LoadScene ("MainMenu");
+			SceneManager.LoadScene ("StartMenu");
 		}
 
 	}
+	*/
+
+	void RampageAndHealthBarDecreasing()
+	{
+		//Decreases the adrenalineBar every few seconds.
+		rampageBar.Rampage -= 5f;
+
+		//If the adrenalineBar hits zero, load the following Scene.
+		if(rampageBar.Rampage <= 0f)
+		{
+			
+			//SceneManager.LoadScene ("StartMenu");
+		}
+		/*
+		if (healthBar.HealthDamageTaken <= 0f) 
+		{
+			SceneManager.LoadScene ("StartMenu");
+		}
+		*/
+	}
+
+		
 }
