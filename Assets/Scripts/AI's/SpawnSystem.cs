@@ -6,7 +6,7 @@ public class SpawnSystem : MonoBehaviour {
 
     //Scripts
     [SerializeField]
-    private Wave[] waves;//ammount of waves
+    private Wave waveEditor;//ammount of waveEditor
     [SerializeField]
     private EnemyKind[] enemies;//import enemy class
 
@@ -17,11 +17,11 @@ public class SpawnSystem : MonoBehaviour {
 
     //Floats
     [SerializeField]
-    private float maxTimeBetweenWaves;//the max ammount of time you get between waves
+    private float maxTimeBetweenWaves;//the max ammount of time you get between waveEditor
     private float maxTimeCounter;//actual vallue that counts down to 0
     private float nextSpawnTime;//for checking if if it is time for the next enemy to spawn
     [SerializeField]
-    public float wavesCounter;//for counting waves
+    public float wavesCounter;//for counting waveEditor
     //Floats
 
     //Bool
@@ -67,11 +67,11 @@ public class SpawnSystem : MonoBehaviour {
 
     void Update()
     {
-        if(wavesCounter>= 1)
-        {
+        //if(wavesCounter>= 1)
+        //{
             spawnCheck();
             WavesCheck();
-        }
+        //}
         
     }
     void WavesCheck()
@@ -140,6 +140,8 @@ public class SpawnSystem : MonoBehaviour {
             if (maxTimeCounter <= 0)
             {
                 NextWave();
+
+                print("test me biatch");
                 wavesCounter++;
                 waveDone = false;
             }
@@ -152,24 +154,21 @@ public class SpawnSystem : MonoBehaviour {
         if(enemiesAlive == 0)
         {
             waveDone = true;
+
+            print("waver");
             maxTimeCounter = maxTimeBetweenWaves;
         }
     }
 
     void NextWave()
     {
-        currentWaveNum++;
-        if (currentWaveNum - 1 < waves.Length)
-        {
-            currentWave = waves[currentWaveNum - 1];
-            currentWave.enemyCountTotal = currentWave.enemyCount1 + currentWave.enemyCount2 + currentWave.enemyCount3 + currentWave.enemyCount4 ;
-            enemiesToSpawn = currentWave.enemyCountTotal;
-            enemiesAlive = enemiesToSpawn;
-            _percentHP = currentWave.addedPercentageHealth;
-            _percentSpeed = currentWave.addedPercentageMovespeed;
-            _percentMoney = currentWave.addedPercentageDeathMoney; 
-            
-        }
+        currentWave = waveEditor;
+        currentWave.enemyCountTotal = currentWave.enemyCount1 + currentWave.enemyCount2 + currentWave.enemyCount3 + currentWave.enemyCount4;
+        enemiesToSpawn = currentWave.enemyCountTotal;
+        enemiesAlive = enemiesToSpawn;
+        _percentHP = currentWave.addedPercentageHealth;
+        _percentSpeed = currentWave.addedPercentageMovespeed;
+        _percentMoney = currentWave.addedPercentageDeathMoney;
     }
 
     [System.Serializable]
@@ -179,7 +178,7 @@ public class SpawnSystem : MonoBehaviour {
     }
 
     [System.Serializable]
-    public class Wave//class for edditing the waves
+    public class Wave//class for edditing the waveEditor
     {
         public int enemyCount1;//how much nr 1 enemies
         //[HideInInspector]
