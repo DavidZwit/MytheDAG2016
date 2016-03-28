@@ -43,14 +43,14 @@ public class EventHandeler : MonoBehaviour {
 
 	public void SomethingBroke(GameObject coll)
     {
-        scoreAdd.IncreaseScore(100);
-        screenShake.Shake(new Vector2(0.5f, 0.3f), 0.8f, 0.01f);
+        //scoreAdd.IncreaseScore(100);
+        //screenShake.Shake(new Vector2(0.5f, 0.3f), 0.8f, 0.01f);
         coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
 
 		//Adds Adrenaline
 		//adrenalineBar.Adrenaline++;
 
-		rampageBar.Rampage++;
+		//rampageBar.Rampage++;
 
         if (coll.gameObject.name == "kasteel_model")
 			SceneManager.LoadScene(0);
@@ -65,12 +65,13 @@ public class EventHandeler : MonoBehaviour {
         }
         else if (coll.gameObject.tag == "Player")
         {
-			//Decreases Adrenaline when hit.
-			//adrenalineBar.DamageTaken ();
+            //Decreases Adrenaline when hit.
+            //adrenalineBar.DamageTaken ();
 
-			rampageBar.RampageDamageTaken ();
-
+            //rampageBar.RampageDamageTaken ();
+            //print(coll.gameObject.name);
 			healthBar.HealthDamageTaken ();
+            print("print me");
 
 			//For the effect of the hit
         }

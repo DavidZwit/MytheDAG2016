@@ -5,6 +5,8 @@ public class ChargeState : State
 {
     private NavMeshAgent agent;
 
+    private HealthBar hpBar;
+
     private bool atackMove;
     [SerializeField]
     private float originalSpeed;
@@ -16,6 +18,7 @@ public class ChargeState : State
     public override void Enter()
     {
         base.Enter();
+        hpBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         agent = GetComponent<NavMeshAgent>();
         StartCoroutine("charge");
         originalSpeed = 10;
@@ -29,6 +32,7 @@ public class ChargeState : State
         {
             if (!atackMove)
             {
+                //print(_player.gameObject);
                 agent.SetDestination(_player.transform.position);
                 distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
                 if (distanceFromPlayer < 20)
@@ -41,13 +45,14 @@ public class ChargeState : State
                 {
                     agent.speed = originalSpeed + 2;
                     _anim.SetFloat("speed", 1.2f);
-                    performaceTimer = 0.2f;
+                    performaceTimer = Random.Range(0.15f, 0.2f);
+                    //print(performaceTimer);
                 }
                 else
                 {
                     agent.speed = originalSpeed;
                     _anim.SetFloat("speed", 1f);
-                    performaceTimer = 1;
+                    performaceTimer = Random.Range(0.5f, 9f);
                 }
             }
             yield return new WaitForSeconds(performaceTimer);
@@ -87,7 +92,8 @@ public class ChargeState : State
     protected override void doDamage()
     {
         base.doDamage();
-        print("god help me");
+        hpBar.HealthDamageTaken();
+        //print("god help me");
     }
     public override void Act()
     {

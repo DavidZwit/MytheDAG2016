@@ -15,10 +15,10 @@ public class PlayerMovement : MonoBehaviour
     public Animator _anim;
 
     private bool AudioPlays = false;
-
-    private float MovementSpeed = 10f;
-    private float turnSmoothing = 3f;
-    private float rotateSpeed = 2f;
+    [SerializeField]
+    private float MovementSpeed = 12f;
+    private float turnSmoothing = 10f;
+    private float rotateSpeed = 8f;
     private float speedDampTime = 0.1f;
     private float minSensitivity = 0.1f;   
     private float Horizontal;

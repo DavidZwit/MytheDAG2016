@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour {
 
@@ -57,12 +58,14 @@ public class HealthBar : MonoBehaviour {
 		//updates the adrenaline bar smooth when the points go up or down.
 		float newX = Mathf.SmoothDamp (transform.localScale.x, health/50 - 0.02f, ref velocity, smoothTime);
 		transform.localScale = new Vector3 (newX, transform.localScale.y, transform.localScale.z);
-        enemyDamg._onDamage += HealthDamageTaken;
+        //enemyDamg._onDamage += HealthDamageTaken;
+        if (health <= 0)
+            SceneManager.LoadScene(0);
 	}
 
 	public void HealthDamageTaken()
 	{
-        print("try me bitch");
+        //print("try me bitch");
 		//Player Takes Damage from projectile
 		health -= damageTaken;
 	}

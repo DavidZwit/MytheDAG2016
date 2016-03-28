@@ -11,7 +11,7 @@ public class rayray : MonoBehaviour {
     private Transform cube;
 
 	void FixedUpdate () {
-        if(Input.GetButton("Fire1"))
+        if(Input.GetButton("Fire2"))
         {
             fireRange += 0.13f;
             if(fireRange > maxFireRange)

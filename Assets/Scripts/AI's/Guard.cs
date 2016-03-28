@@ -31,8 +31,8 @@ public class Guard : LivingEntity
         //print(health + "hp");
         /** we halen een referentie op naar de state machine */
         stateMachine = GetComponent<StateMachine>();
-
-		/** we voegen de verschillende states toe aan de state machine */
+        //anim.GetComponent<Animator>();
+        /** we voegen de verschillende states toe aan de state machine */
 		MakeStates();
 
         /** we geven de eerste state door (rondlopen) */
@@ -54,7 +54,7 @@ public class Guard : LivingEntity
     protected override void death()
     {
         base.death();//gets the death from living entity
-        anim.SetBool("alive", false);
+        //anim.SetBool("alive", false);
     }
 
     void MakeStates() {

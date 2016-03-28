@@ -22,6 +22,7 @@ public abstract class State : MonoBehaviour {
         if (_player != null)
             _targetAlive = true;
         _anim = GetComponent<Animator>();
+        //print(_player.transform.position);
     }
 
 	public virtual void Leave ()
@@ -42,8 +43,8 @@ public abstract class State : MonoBehaviour {
 
     virtual protected void doDamage()//when would this be used >_>
     {
-        if (_onDamage != null)
-            _onDamage();
+        /*if (_onDamage != null)
+            _onDamage();*/
     }
 
     public abstract void Reason ();

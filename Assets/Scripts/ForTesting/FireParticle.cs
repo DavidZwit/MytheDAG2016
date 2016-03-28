@@ -11,7 +11,7 @@ public class FireParticle : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire2"))
         {
             gameObject.GetComponent<ParticleSystem>().enableEmission = true;
         }
