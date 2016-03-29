@@ -43,7 +43,7 @@ public class ChargeState : State
                 }
                 else if (distanceFromPlayer < 2000)
                 {
-                    print("test");
+                    //print("test");
                     agent.speed = originalSpeed + 2;
                     _anim.SetFloat("speed", 1.2f);
                     performaceTimer = Random.Range(0.15f, 0.2f);
@@ -51,7 +51,7 @@ public class ChargeState : State
                 }
                 else
                 {
-                    print("test2");
+                    //print("test2");
                     agent.speed = originalSpeed;
                     _anim.SetFloat("speed", 1f);
                     performaceTimer = Random.Range(0.5f, 9f);

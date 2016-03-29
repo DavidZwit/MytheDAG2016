@@ -7,16 +7,28 @@ public class rayray : MonoBehaviour {
     private float maxFireRange;
     private float fireRange;
 
+    private RampageBar rageOrNaw;
+
     [SerializeField]
     private Transform cube;
 
-	void FixedUpdate () {
-        if(Input.GetButton("Fire2"))
+    //[SerializeField]
+    //GameObject rampageImage;
+
+    void Awake ()
+    {
+        rageOrNaw = GameObject.Find("RampageBar").GetComponent<RampageBar>();
+    }
+    void FixedUpdate () {
+        if (rageOrNaw.enraged == true)
         {
-            fireRange += 0.13f;
-            if(fireRange > maxFireRange)
-            {
-                fireRange = maxFireRange;
+            if (Input.GetButton("Fire2"))
+            { 
+                fireRange += 0.13f;
+                if (fireRange > maxFireRange)
+                {
+                    fireRange = maxFireRange;
+                }
             }
         }
         else

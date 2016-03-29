@@ -29,7 +29,7 @@ public class EventHandeler : MonoBehaviour {
     void Start()
     {
 		//InvokeRepeating ("AdrenalineBarDecreasing" ,0.1f ,0.1f);
-		InvokeRepeating ("RampageAndHealthBarDecreasing" ,0.1f ,0.1f);
+		StartCoroutine("RampageBarDecreasing");
         brokenObjectsNeededLeft = (breakableObjects / 100) * Mathf.Abs(perCentWonCodition - 100);
     }
 
@@ -71,13 +71,13 @@ public class EventHandeler : MonoBehaviour {
             //rampageBar.RampageDamageTaken ();
             //print(coll.gameObject.name);
 			healthBar.HealthDamageTaken ();
-            print("print me");
+            //print("print me");
 
 			//For the effect of the hit
         }
     }
 
-	/*
+    /*
 	void AdrenalineBarDecreasing()
 	{
 		//Decreases the adrenalineBar every few seconds.
@@ -92,24 +92,19 @@ public class EventHandeler : MonoBehaviour {
 	}
 	*/
 
-	void RampageAndHealthBarDecreasing()
-	{
-		//Decreases the adrenalineBar every few seconds.
-		rampageBar.Rampage -= 5f;
+    IEnumerator RampageBarDecreasing()
+    {
+        while (true)
+        {
+            if (rampageBar.Rampage >= 1f)
+            {
+                rampageBar.Rampage--;
+            }
+            //print("removing rampage");
+            //Decreases the adrenalineBar every few seconds.
+            yield return new WaitForSeconds(0.1f);
 
-		//If the adrenalineBar hits zero, load the following Scene.
-		if(rampageBar.Rampage <= 0f)
-		{
-			
-			//SceneManager.LoadScene ("StartMenu");
-		}
-		/*
-		if (healthBar.HealthDamageTaken <= 0f) 
-		{
-			SceneManager.LoadScene ("StartMenu");
-		}
-		*/
-	}
+        }
 
-		
+    }
 }
