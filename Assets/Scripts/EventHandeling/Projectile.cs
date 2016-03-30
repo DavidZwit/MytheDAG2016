@@ -28,5 +28,7 @@ public class Projectile : MonoBehaviour
         rb.useGravity = true;
         coll.transform.parent = null;
         rb.AddForce(player.transform.forward * 2500);
+        if (coll.name == "ExplosiveBarrel")
+            coll.AddComponent<BulletHit>();
     }
 }

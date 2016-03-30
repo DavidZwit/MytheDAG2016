@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class EventHandeler : MonoBehaviour
 {
-
+    Fade fade;
     RandomShake screenShake;
 
     public delegate void ReachedObjective();
@@ -24,6 +24,7 @@ public class EventHandeler : MonoBehaviour
         adrenalineBar = GameObject.Find("Image").GetComponent<AdrenalineBar>();
         scoreAdd = GetComponent<AddScore>();
         screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
+        fade = GameObject.Find("FadeImage").GetComponent<Fade>();
     }
 
     void Start()
@@ -61,15 +62,13 @@ public class EventHandeler : MonoBehaviour
     public void BulletHitSomething(Collision coll)
     {
         if (coll.gameObject.tag == "Breakable")
-        {
             coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
-        }
+
         else if (coll.gameObject.tag == "Player")
         {
             scoreAdd.DecreaseScore(100);
             //Decreases Adrenaline when hit.
             adrenalineBar.Adrenaline -= 5f;
-
         }
     }
 
@@ -85,8 +84,12 @@ public class EventHandeler : MonoBehaviour
 
         if (adrenalineBar.Adrenaline <= 0f)
         {
-            SceneManager.LoadScene ("MainMenu");
+            fade.StartFade(2, LoadLevel);
         }
+    }
 
+    void LoadLevel()
+    {
+        SceneManager.LoadScene(2);
     }
 }

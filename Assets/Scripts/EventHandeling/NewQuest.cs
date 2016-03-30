@@ -17,7 +17,7 @@ public class NewQuest : MonoBehaviour
         if (objectivesLeft <= 0)
         {
             EndQuest();
-            print("Quest Over!");
+            print("Quest Won!");
         }
     }
 
@@ -38,6 +38,7 @@ public class NewQuest : MonoBehaviour
 
     void EndQuest()
     {
+        print("Quest Lost!");
         randomQuest._haveQuest = false;
         EventHandeler._buildingBroke -= DestroyedGameObject;
     }

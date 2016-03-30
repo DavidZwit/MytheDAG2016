@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y - 2.9f, transform.position.z), transform.forward), out hit, hitRange))
                 {
+                    print(hit.collider.gameObject);
                     if (hit.collider.gameObject.tag == "Breakable")
                     {
                         handeler.SomethingBroke(hit.collider.gameObject);

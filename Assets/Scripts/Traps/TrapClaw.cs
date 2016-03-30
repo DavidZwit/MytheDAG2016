@@ -12,8 +12,7 @@ public class TrapClaw : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision coll)
-    {
-        print("We Collided with: " + coll.gameObject.name);
+    { 
         //Check for collision with an object
         StartCoroutine(TrapCaught(coll));
     }

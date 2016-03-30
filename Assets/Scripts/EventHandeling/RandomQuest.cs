@@ -45,7 +45,7 @@ public class RandomQuest : MonoBehaviour
 
             if (i == 0)
             {
-                print("Event");
+                print("New Quest");
                 SetQuest();
                 haveQuest = true;
             }
@@ -64,7 +64,7 @@ public class RandomQuest : MonoBehaviour
                 questDisplayer.SpawnQuestText(0);
                 break;
             case "Destroy 5 buildings!":
-                newQuest.QuestDestroyBuilding(20);
+                newQuest.QuestDestroyBuilding(3);
                 questDisplayer.SpawnQuestText(1);
                 break;
         }

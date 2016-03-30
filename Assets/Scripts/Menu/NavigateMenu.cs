@@ -36,6 +36,12 @@ public class NavigateMenu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    //Load the mainmenu
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     //Quits the game
     public void QuitGame()
     {
