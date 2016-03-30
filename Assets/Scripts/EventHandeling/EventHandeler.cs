@@ -50,7 +50,7 @@ public class EventHandeler : MonoBehaviour {
 		//Adds Adrenaline
 		//adrenalineBar.Adrenaline++;
 
-		//rampageBar.Rampage++;
+		rampageBar.Rampage++;
 
         if (coll.gameObject.name == "kasteel_model")
 			SceneManager.LoadScene(0);

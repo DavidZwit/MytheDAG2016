@@ -35,16 +35,16 @@ public class ChargeState : State
                 //print(_player.gameObject);
                 agent.SetDestination(_player.transform.position);
                 distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
-                if (distanceFromPlayer < 100)
+                if (distanceFromPlayer < 70)
                 {
                     atackMove = true;
                     _anim.SetBool("attacking", atackMove);
                     StartCoroutine("attack");
                 }
-                else if (distanceFromPlayer < 2000)
+                else if (distanceFromPlayer < 3500)
                 {
                     //print("test");
-                    agent.speed = originalSpeed + 2;
+                    agent.speed = originalSpeed + 10;
                     _anim.SetFloat("speed", 1.2f);
                     performaceTimer = Random.Range(0.15f, 0.2f);
                     //print(performaceTimer);
@@ -52,9 +52,9 @@ public class ChargeState : State
                 else
                 {
                     //print("test2");
-                    agent.speed = originalSpeed;
+                    agent.speed = originalSpeed+ 4;
                     _anim.SetFloat("speed", 1f);
-                    performaceTimer = Random.Range(0.5f, 9f);
+                    performaceTimer = Random.Range(0.5f, 0.9f);
                 }
             }
             yield return new WaitForSeconds(performaceTimer);

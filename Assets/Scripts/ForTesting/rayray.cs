@@ -30,12 +30,18 @@ public class rayray : MonoBehaviour {
                     fireRange = maxFireRange;
                 }
             }
+            else
+            {
+                fireRange = 0;
+                cube.position = transform.position;
+            }
         }
         else
         {
             fireRange = 0;
             cube.position = transform.position;
         }
+
 
         RaycastHit hit = new RaycastHit();
         if(Physics.SphereCast(transform.position, 1, transform.forward, out hit, fireRange))

@@ -21,11 +21,14 @@ public class FireParticle : MonoBehaviour
             {
                 gameObject.GetComponent<ParticleSystem>().enableEmission = true;
             }
+            else
+            {
+                gameObject.GetComponent<ParticleSystem>().enableEmission = false;
+            }
         }
         else
         {
             gameObject.GetComponent<ParticleSystem>().enableEmission = false;
         }
-        
     }
 }

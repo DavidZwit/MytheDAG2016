@@ -21,7 +21,9 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             RaycastHit hit;
             if (!canThrow) {
-                if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y , transform.position.z), transform.forward), out hit, hitRange)) {
+                Debug.DrawRay(transform.position, transform.forward);
+                if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y + 5.5f, transform.position.z), transform.forward), out hit, hitRange) ||
+                    Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), transform.forward), out hit, hitRange)) {
                     if (hit.collider.gameObject.tag == "Breakable") {
                         handeler.SomethingBroke(hit.collider.gameObject);
                     }
