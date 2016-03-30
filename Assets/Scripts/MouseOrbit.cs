@@ -55,9 +55,9 @@ public class MouseOrbit : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1.0f * Time.deltaTime);
 
             RaycastHit hit;
-            if (Physics.Linecast(Target.position, transform.position, out hit))
+            if (Physics.Linecast(Target.position,this.transform.position, out hit))
             {
-                Distance -= hit.distance;
+                Distance -= hit.distance;                
             }
 
             transform.rotation = rotation;
