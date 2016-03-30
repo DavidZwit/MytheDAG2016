@@ -29,7 +29,7 @@ public class EventHandeler : MonoBehaviour {
     void Start()
     {
 		//InvokeRepeating ("AdrenalineBarDecreasing" ,0.1f ,0.1f);
-		InvokeRepeating ("RampageAndHealthBarDecreasing" ,0.1f ,0.1f);
+		StartCoroutine(RampageBarDecreasing());
         brokenObjectsNeededLeft = (breakableObjects / 100) * Mathf.Abs(perCentWonCodition - 100);
     }
 
@@ -56,7 +56,7 @@ public class EventHandeler : MonoBehaviour {
 			SceneManager.LoadScene(0);
     }
 
-    public void BulletShitSomething(Collision coll)
+    public void BulletHitSomething(Collision coll)
     {
         if (coll.gameObject.tag == "Breakable")
         {
@@ -68,8 +68,10 @@ public class EventHandeler : MonoBehaviour {
 			//Decreases Adrenaline when hit.
 			//adrenalineBar.DamageTaken ();
 
+			//Decreases Rampage when hit.
 			rampageBar.RampageDamageTaken ();
 
+			//Decreases Health when hit.
 			healthBar.HealthDamageTaken ();
 
 			//For the effect of the hit
@@ -91,23 +93,19 @@ public class EventHandeler : MonoBehaviour {
 	}
 	*/
 
-	void RampageAndHealthBarDecreasing()
+	IEnumerator RampageBarDecreasing()
 	{
-		//Decreases the adrenalineBar every few seconds.
-		rampageBar.Rampage -= 5f;
+		//While the rampageBar is lower or the same as 1 play the Coroutine.
+		while (true) {
+			if (rampageBar.Rampage >= 1f) {
+				rampageBar.Rampage--;
+			}
+			print ("removing rampage");
+			//Decreases the RampageBar every few seconds.
+			yield return new WaitForSeconds(0.1f);
 
-		//If the adrenalineBar hits zero, load the following Scene.
-		if(rampageBar.Rampage <= 0f)
-		{
+		}
 			
-			//SceneManager.LoadScene ("StartMenu");
-		}
-		/*
-		if (healthBar.HealthDamageTaken <= 0f) 
-		{
-			SceneManager.LoadScene ("StartMenu");
-		}
-		*/
 	}
 
 		

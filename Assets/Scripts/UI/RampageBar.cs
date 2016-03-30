@@ -62,7 +62,10 @@ public class RampageBar : MonoBehaviour {
 	public void RampageDamageTaken()
 	{
 		//Player Takes Damage from projectile
-		rampage -= damageTaken;
+		if (rampage - damageTaken >= 1) {
+			
+			rampage -= damageTaken;
+		}
 	}
 
 }

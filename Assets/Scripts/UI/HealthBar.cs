@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour {
 
 	[SerializeField] GameObject healthImage;
-	[SerializeField] private float health = 100f;
+	[SerializeField] private float health = 5f;
 	[SerializeField] private float maxHealth = 100f;
-	[SerializeField] private float healthRemoval = 0.5f;
-	[SerializeField] private float healthHitPoints = 10f;
+	//[SerializeField] private float healthRemoval = 0.5f;
+	//[SerializeField] private float healthHitPoints = 10f;
 	[SerializeField] private float smoothTime = 0.1f;
 	[SerializeField] private float damageTaken = 10f;
 	private float velocity;
@@ -54,6 +54,10 @@ public class HealthBar : MonoBehaviour {
 		//updates the adrenaline bar smooth when the points go up or down.
 		float newX = Mathf.SmoothDamp (transform.localScale.x, health/50 - 0.02f, ref velocity, smoothTime);
 		transform.localScale = new Vector3 (newX, transform.localScale.y, transform.localScale.z);
+		if (health <= 0f) 
+		{
+			SceneManager.LoadScene(0);
+		}
 	}
 
 	public void HealthDamageTaken()

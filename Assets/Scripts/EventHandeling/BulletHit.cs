@@ -12,6 +12,6 @@ public class BulletHit : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll)
     {
-        handeler.BulletShitSomething(coll);
+        handeler.BulletHitSomething(coll);
     }
 }
