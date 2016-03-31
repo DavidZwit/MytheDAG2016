@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class NavigateMenu : SavePlayerSettings
+public class NavigateMenu : MonoBehaviour
 {
     private GameObject buttonMenu;
     private GameObject optionMenu;
@@ -11,8 +11,6 @@ public class NavigateMenu : SavePlayerSettings
     {
         buttonMenu = GameObject.Find("ButtonMenu");
         optionMenu = GameObject.Find("OptionMenu");
-
-        LoadSettings();
 
         optionMenu.SetActive(false);
     }
@@ -36,6 +34,12 @@ public class NavigateMenu : SavePlayerSettings
     {
         //Laat hier nog een "Loading" plaatje zien
         SceneManager.LoadScene(1);
+    }
+
+    //Load the mainmenu
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     //Quits the game

@@ -3,16 +3,12 @@ using System.Collections;
 
 public class SavePlayerSettings : MonoBehaviour
 {
-    private OptionShadowRes optionShadowRes;
     private OptionShadowDist optionShadowDist;
     private OptionTextureRes optionTextureRes;
     private OptionvSync optionvSync;
     private OptionAF optionAF;
     private OptionAA optionAA;
-    //private TestBerend berendlol;
-
-    private int shadowResValue;
-    public int ShadowResValue { get { return shadowResValue; } }
+    
     private int shadowDistValue;
     public int ShadowDistValue { get { return shadowDistValue; } }
     private int textureResValue;
@@ -21,53 +17,45 @@ public class SavePlayerSettings : MonoBehaviour
     public int VsyncValue { get { return vsyncValue; } }
     private int afValue;
     public int AFValue { get { return afValue; } }
-    private float aaValue;
-    public float AAValue { get { return aaValue; } }
+    private int aaValue;
+    public int AAValue { get { return aaValue; } }
 
     void Awake()
     {
-        optionShadowRes = GameObject.Find("DropdownShadowRes").GetComponent<OptionShadowRes>();
         optionShadowDist = GameObject.Find("DropdownShadowDist").GetComponent<OptionShadowDist>();
         optionTextureRes = GameObject.Find("DropdownTextureRes").GetComponent<OptionTextureRes>();
         optionvSync = GameObject.Find("DropdownvSync").GetComponent<OptionvSync>();
         optionAF = GameObject.Find("DropdownAF").GetComponent<OptionAF>();
-        optionAA = GameObject.Find("SliderAA").GetComponent<OptionAA>();
-    }
+        optionAA = GameObject.Find("DropdownAA").GetComponent<OptionAA>();
 
-    void Update()
-    {
-        //print(berendlol._shadowValue);
+        LoadSettings();
     }
 
     public void SaveSettings()
     {
-        shadowResValue = optionShadowRes.dropdownShadowResolition.value;
-        shadowDistValue = optionShadowDist.dropdownShadowDistance.value;
-        textureResValue = optionTextureRes.dropdownTextureResolition.value;
-        vsyncValue = optionvSync._dropdownvSync.value;
-        afValue = optionAF.dropdownAF.value;
-        aaValue = optionAA.sliderAA.value;
-        PlayerPrefs.SetInt("ShadowResValue", shadowResValue);
+        shadowDistValue = optionShadowDist._shadowDistValue;
+        textureResValue = optionTextureRes._textureResValue;
+        vsyncValue = optionvSync._vSyncValue;
+        afValue = optionAF._afValue;
+        aaValue = optionAA._aaValue;
         PlayerPrefs.SetInt("ShadowDistValue", shadowDistValue);
         PlayerPrefs.SetInt("TextureResValue", textureResValue);
         PlayerPrefs.SetInt("DropdownvSync", vsyncValue);
         PlayerPrefs.SetInt("AFValue", afValue);
-        PlayerPrefs.SetFloat("AAValue", aaValue);
+        PlayerPrefs.SetInt("AAValue", aaValue);
     }
 
     public void LoadSettings()
     {
-        shadowResValue = PlayerPrefs.GetInt("ShadowResValue");
         shadowDistValue = PlayerPrefs.GetInt("ShadowDistValue");
         textureResValue = PlayerPrefs.GetInt("TextureResValue");
         vsyncValue = PlayerPrefs.GetInt("DropdownvSync");
         afValue = PlayerPrefs.GetInt("AFValue");
-        aaValue = PlayerPrefs.GetFloat("AAValue");
-        optionShadowRes.dropdownShadowResolition.value = shadowResValue;
-        optionShadowDist.dropdownShadowDistance.value = shadowDistValue;
-        optionTextureRes.dropdownTextureResolition.value = textureResValue;
-        optionvSync._dropdownvSync.value = vsyncValue;
-        optionAF.dropdownAF.value = afValue;
-        optionAA.sliderAA.value = aaValue;
+        aaValue = PlayerPrefs.GetInt("AAValue");
+        optionShadowDist._shadowDistValue = shadowDistValue;
+        optionTextureRes._textureResValue = textureResValue;
+        optionvSync._vSyncValue = vsyncValue;
+        optionAF._afValue = afValue;
+        optionAA._aaValue = aaValue;
     }
 }

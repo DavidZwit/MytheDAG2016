@@ -4,23 +4,29 @@ using System.Collections;
 
 public class OptionAF : MonoBehaviour
 {
-    public Dropdown dropdownAF;
+    private Dropdown dropDown;
+    [HideInInspector] public int _afValue;
 
-    void Update()
+    void Awake()
     {
-        if (dropdownAF.value == 0)
-        {
+        dropDown = GetComponent<Dropdown>();
+        dropDown.value = _afValue;
+    }
+
+    public void AFChanged (int value)
+    {
+        _afValue = value;
+
+        //Disabled
+        if (value == 0)
             QualitySettings.anisotropicFiltering = AnisotropicFiltering.Disable;
-        }
 
-        else if (dropdownAF.value == 1)
-        {
+        //Enabled
+        else if (value == 1)
             QualitySettings.anisotropicFiltering = AnisotropicFiltering.Enable;
-        }
 
-        else if (dropdownAF.value == 2)
-        {
+        //Force Enable
+        else if (value == 2)
             QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
-        }
     }
 }
