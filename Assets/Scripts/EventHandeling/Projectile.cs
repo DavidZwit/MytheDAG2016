@@ -13,7 +13,6 @@ public class Projectile : MonoBehaviour
     //Sets the projectile as a child of the player, freeze it and change its position
     public void PickupProjectile(GameObject coll)
     {
-        print("pickedUP!");
         Rigidbody rb = coll.GetComponent<Rigidbody>();
         coll.transform.parent = player;
         coll.transform.position = new Vector3 (player.position.x, player.position.y + 12, player.position.z);
@@ -24,7 +23,6 @@ public class Projectile : MonoBehaviour
     //Unfreeze the picked-up projectile and shoot it forward
     public void ShootProjectile(GameObject coll)
     {
-        print("THROw!");
         Rigidbody rb = coll.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = true;
