@@ -6,14 +6,15 @@ public enum CitizenStateID
 {
     NullStateID = 0,
 }
-public class Citizen : MonoBehaviour {
+public class Citizen : LivingEntity {
 
     /** we declareren de statemachine */
     private StateMachine stateMachine;
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
+        base.Start();//gets the start from living entity
         /** we halen een referentie op naar de state machine */
         stateMachine = GetComponent<StateMachine>();
 
@@ -23,7 +24,10 @@ public class Citizen : MonoBehaviour {
         /** we geven de eerste state door (rondlopen) */
         stateMachine.SetState(StateID.Wandering);
     }
-
+    protected override void death()
+    {
+        base.death();//gets the death from living entity
+    }
     void MakeStates()
     {
         stateMachine.AddState(StateID.Alerting, GetComponent<AlertState>());

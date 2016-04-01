@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.Find("Player").GetComponent<Transform>();
+        player = GameObject.Find("Player(Goliath)").GetComponent<Transform>();
     }
 
     //Sets the projectile as a child of the player, freeze it and change its position
@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
     {
         Rigidbody rb = coll.GetComponent<Rigidbody>();
         coll.transform.parent = player;
-        coll.transform.position = new Vector3 (player.position.x, player.position.y + 4, player.position.z);
+        coll.transform.position = new Vector3 (player.position.x, player.position.y + 12, player.position.z);
         rb.isKinematic = true;
         rb.useGravity = false;
     }
