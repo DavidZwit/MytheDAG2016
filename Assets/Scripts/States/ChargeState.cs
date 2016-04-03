@@ -5,20 +5,28 @@ public class ChargeState : State
 {
     private NavMeshAgent agent;
 
+    private HealthBar hpBar;
+
     private bool atackMove;
-    [SerializeField]
     private float originalSpeed;
     private float performaceTimer;
     private float distanceFromPlayer;
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private float dammage;
 
 
 
     public override void Enter()
     {
         base.Enter();
+        hpBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         agent = GetComponent<NavMeshAgent>();
+        speed += speed / 100 * _waveStats._percentSpeed;
+        dammage += dammage / 100 * _waveStats._percentDamage;
+        originalSpeed = speed;
         StartCoroutine("charge");
-        originalSpeed = 10;
         atackMove = false;
         //print(agent.speed);
     }
@@ -29,25 +37,29 @@ public class ChargeState : State
         {
             if (!atackMove)
             {
+                //print(_player.gameObject);
                 agent.SetDestination(_player.transform.position);
                 distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
-                if (distanceFromPlayer < 20)
+                if (distanceFromPlayer < 100)
                 {
                     atackMove = true;
                     _anim.SetBool("attacking", atackMove);
                     StartCoroutine("attack");
                 }
-                else if (distanceFromPlayer < 200)
+                else if (distanceFromPlayer < 2000)
                 {
-                    agent.speed = originalSpeed + 2;
+                    //print("test");
+                    agent.speed = originalSpeed * 1.2f;
                     _anim.SetFloat("speed", 1.2f);
-                    performaceTimer = 0.2f;
+                    performaceTimer = Random.Range(0.15f, 0.2f);
+                    //print(performaceTimer);
                 }
                 else
                 {
+                    //print("test2");
                     agent.speed = originalSpeed;
                     _anim.SetFloat("speed", 1f);
-                    performaceTimer = 1;
+                    performaceTimer = Random.Range(0.5f, 9f);
                 }
             }
             yield return new WaitForSeconds(performaceTimer);
@@ -87,7 +99,8 @@ public class ChargeState : State
     protected override void doDamage()
     {
         base.doDamage();
-        print("god help me");
+        hpBar.HealthDamageTaken(dammage);
+        //print("god help me");
     }
     public override void Act()
     {

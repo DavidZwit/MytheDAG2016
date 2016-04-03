@@ -7,16 +7,33 @@ public class rayray : MonoBehaviour {
     private float maxFireRange;
     private float fireRange;
 
+    private RampageBar rageOrNaw;
+
     [SerializeField]
     private Transform cube;
 
-	void FixedUpdate () {
-        if(Input.GetButton("Fire1"))
+    //[SerializeField]
+    //GameObject rampageImage;
+
+    void Awake ()
+    {
+        rageOrNaw = GameObject.Find("RampageBar").GetComponent<RampageBar>();
+    }
+    void FixedUpdate () {
+        if (rageOrNaw.enraged == true)
         {
-            fireRange += 0.13f;
-            if(fireRange > maxFireRange)
+            if (Input.GetButton("Fire2"))
+            { 
+                fireRange += 0.13f;
+                if (fireRange > maxFireRange)
+                {
+                    fireRange = maxFireRange;
+                }
+            }
+            else
             {
-                fireRange = maxFireRange;
+                fireRange = 0;
+                cube.position = transform.position;
             }
         }
         else
@@ -37,7 +54,7 @@ public class rayray : MonoBehaviour {
         IDamageable damageableObject = hit.collider.GetComponent<IDamageable>();//check for component idamagable on the hit object
         if (damageableObject != null)//"if object has idamagable"
         {
-            damageableObject.TakeDamg(1);//damage it
+            damageableObject.TakeDamg(100);//damage it
         }
         cube.position = hit.point;
         cube.rotation = Quaternion.LookRotation(hit.normal);

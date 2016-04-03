@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour {
     Projectile projectile;
     bool attacking;
     bool canThrow = false;
-    int hitRange = 3;
+    int hitRange = 9;
 
 	void Awake()
     {
@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             RaycastHit hit;
             if (!canThrow) {
-                if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y -2.9f, transform.position.z), transform.forward), out hit, hitRange)) {
+                if (Physics.Raycast(new Ray(new Vector3(transform.position.x, transform.position.y , transform.position.z), transform.forward), out hit, hitRange)) {
                     if (hit.collider.gameObject.tag == "Breakable") {
                         handeler.SomethingBroke(hit.collider.gameObject);
                     }

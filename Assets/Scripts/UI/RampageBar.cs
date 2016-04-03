@@ -13,6 +13,7 @@ public class RampageBar : MonoBehaviour {
 	[SerializeField] private float rampageHitPoints = 10f;
 	[SerializeField] private float smoothTime = 0.1f;
 	[SerializeField] private float damageTaken = 10f;
+    public bool enraged = false;
 	private float velocity;
 
 	void Start() 
@@ -47,22 +48,31 @@ public class RampageBar : MonoBehaviour {
 					rampage = maxRampage;
 				}
 			}
-
 		}
-
 	}
 
 	void Update()
 	{
 		//updates the adrenaline bar smooth when the points go up or down.
 		float newX = Mathf.SmoothDamp (transform.localScale.x, rampage/50 - 0.02f, ref velocity, smoothTime);
+        if (newX <= minRampage)
+            newX = minRampage;
 		transform.localScale = new Vector3 (newX, transform.localScale.y, transform.localScale.z);
+        if (rampage >= 80)
+        {
+            enraged = true;
+        }
+        else
+            enraged = false;
 	}
 
-	public void RampageDamageTaken()
-	{
-		//Player Takes Damage from projectile
-		rampage -= damageTaken;
-	}
+    public void RampageDamageTaken()
+    {
+        //Player Takes Damage from projectile
+        if (rampage - damageTaken >= 1)
+        {
 
+            rampage -= damageTaken;
+        }
+    }
 }

@@ -2660,7 +2660,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Goliath_run
       takeName: goliath model armor rig
-      firstFrame: 151
+      firstFrame: 152
       lastFrame: 164
       wrapMode: 0
       orientationOffsetY: 0
@@ -3038,7 +3038,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Goliath_idle
       takeName: goliath model armor rig
-      firstFrame: 164
+      firstFrame: 165
       lastFrame: 189
       wrapMode: 0
       orientationOffsetY: 0

@@ -22,6 +22,7 @@ public class CatapultAnim : MonoBehaviour {
 
 	void ShootAnimation()
 	{
+        //Debug.Log("Play");
 		if (curveAnim._curveShootAnim) 
 		{
 			anim.SetBool ("IdleAnim", false);
@@ -30,7 +31,8 @@ public class CatapultAnim : MonoBehaviour {
 		
 		else if (!curveAnim._curveShootAnim)
 		{
-			anim.SetBool ("IdleAnim", true);
+            //Debug.Log("Idle");
+            anim.SetBool ("IdleAnim", true);
 			anim.SetBool ("ShootAnim", false);
 		}
 	}

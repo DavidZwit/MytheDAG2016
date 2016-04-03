@@ -4,7 +4,7 @@ using System.Collections;
 public class LivingEntity : MonoBehaviour, IDamageable
 {
     [SerializeField]
-    protected float _startingHealth;//how much health at the start
+    protected float startingHealth;//how much health at the start
     protected float health;//how much health
     protected bool dead;//to be or not to be :)
 
@@ -12,7 +12,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
 
     protected virtual void Start()
     {
-        health = _startingHealth;//sets health  
+        health = startingHealth;//sets health  
     }
 
     public void TakeDamg(float damage)

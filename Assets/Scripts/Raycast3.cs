@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 
 public class Raycast3 : MonoBehaviour {
-    public static float distance3 = 5;
+    public static float distance3 = 20;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,6 +14,7 @@ public class Raycast3 : MonoBehaviour {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
         {
             distance3 = hit.distance;
+            
         }
 	
 	}

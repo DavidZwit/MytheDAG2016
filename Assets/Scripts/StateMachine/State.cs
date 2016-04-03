@@ -13,15 +13,22 @@ public abstract class State : MonoBehaviour {
     protected bool _targetAlive;
     [HideInInspector]
     protected Animator _anim;
+    [HideInInspector]
+    protected GameObject _findSpawner;//finds spawner object
+    [HideInInspector]
+    protected SpawnSystem _waveStats;//imports spawnsystem
 
 
     public virtual void Enter ()
 	{
+        _findSpawner = GameObject.Find("unitSpawner");
+        _waveStats = _findSpawner.GetComponent<SpawnSystem>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _alertedByOther = false;
         if (_player != null)
             _targetAlive = true;
         _anim = GetComponent<Animator>();
+        //print(_player.transform.position);
     }
 
 	public virtual void Leave ()
@@ -42,8 +49,8 @@ public abstract class State : MonoBehaviour {
 
     virtual protected void doDamage()//when would this be used >_>
     {
-        if (_onDamage != null)
-            _onDamage();
+        /*if (_onDamage != null)
+            _onDamage();*/
     }
 
     public abstract void Reason ();
