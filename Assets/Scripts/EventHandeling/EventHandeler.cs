@@ -70,7 +70,7 @@ public class EventHandeler : MonoBehaviour {
 
             //rampageBar.RampageDamageTaken ();
             //print(coll.gameObject.name);
-			healthBar.HealthDamageTaken ();
+			//healthBar.HealthDamageTaken ();
             //print("print me");
 
 			//For the effect of the hit

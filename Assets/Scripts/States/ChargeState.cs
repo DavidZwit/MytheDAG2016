@@ -70,7 +70,7 @@ public class ChargeState : State
     {
         Vector3 originalPosition = transform.position;
         Vector3 dirToTarget = (_player.transform.position - transform.position).normalized;
-        Vector3 attackPosition = _player.transform.position - dirToTarget * (1);
+        Vector3 attackPosition = _player.transform.position - dirToTarget * (2);
 
         float attackSpeed = 3;
         float percent = 0;
@@ -88,7 +88,7 @@ public class ChargeState : State
             }
 
             percent += Time.deltaTime * attackSpeed;
-            float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
+            float interpolation = (-Mathf.Pow(percent, 2) + percent) * 2;
             transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
 
             yield return null;
