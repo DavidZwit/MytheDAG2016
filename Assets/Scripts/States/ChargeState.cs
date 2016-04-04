@@ -51,7 +51,7 @@ public class ChargeState : State
                     //print("test");
                     agent.speed = originalSpeed * 1.2f;
                     _anim.SetFloat("speed", 1.2f);
-                    performaceTimer = Random.Range(0.15f, 0.2f);
+                    performaceTimer = Random.Range(0.2f, 0.25f);
                     //print(performaceTimer);
                 }
                 else
@@ -59,7 +59,7 @@ public class ChargeState : State
                     //print("test2");
                     agent.speed = originalSpeed;
                     _anim.SetFloat("speed", 1f);
-                    performaceTimer = Random.Range(0.5f, 9f);
+                    performaceTimer = Random.Range(0.5f, 0.7f);
                 }
             }
             yield return new WaitForSeconds(performaceTimer);

@@ -25,6 +25,11 @@ public class LivingEntity : MonoBehaviour, IDamageable
             print("killed by mayro minion");
         }
     }
+    
+    public void knockBack(Transform centerSmash)
+    {
+        
+    }
 
     virtual protected void death()//when would this be used >_>
     {
