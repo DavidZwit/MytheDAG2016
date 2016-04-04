@@ -12,7 +12,7 @@ public class BulletHit : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll)
     {
-        if (gameObject.name == "ExplosiveBarrel")
+        if (gameObject.name == "ExplosiveBarrel" || gameObject.name == "ExplosiveBarrel(Clone)")
         {
             StartCoroutine(ExplodeBarrel(gameObject));
             handeler.BulletHitSomething(coll);

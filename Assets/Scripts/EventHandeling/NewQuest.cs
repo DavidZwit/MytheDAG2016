@@ -40,7 +40,7 @@ public class NewQuest : MonoBehaviour
     {
         print("Quest Lost!");
         randomQuest._haveQuest = false;
-        EventHandeler._buildingBroke -= DestroyedGameObject;
+        //EventHandeler._buildingBroke -= DestroyedGameObject;
     }
 
     public void QuestKillEnemy(int timeLeft)
@@ -52,6 +52,6 @@ public class NewQuest : MonoBehaviour
     {
         StartCoroutine(Counter(timeLeft));
         objectivesLeft = 5;
-        EventHandeler._buildingBroke += DestroyedGameObject;
+        //EventHandeler._buildingBroke += DestroyedGameObject;
     }
 }
