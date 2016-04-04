@@ -2,22 +2,52 @@
 using System.Collections;
 
 public abstract class State : MonoBehaviour {
+
     [HideInInspector]
-    public GameObject _player;
-    
+    public event System.Action _onDamage;
+    [HideInInspector]
+    protected GameObject _player;
+    [HideInInspector]
+    public bool _alertedByOther;
+    [HideInInspector]
+    protected bool _targetAlive;
+    [HideInInspector]
+    protected Animator _anim;
+
 
     public virtual void Enter ()
 	{
         _player = GameObject.FindGameObjectWithTag("Player");
-	}
+        _alertedByOther = false;
+        if (_player != null)
+            _targetAlive = true;
+        _anim = GetComponent<Animator>();
+        //print(_player.transform.position);
+    }
 
 	public virtual void Leave ()
 	{
-	} 
+	}
 
-	public abstract void Act ();
+    public virtual void Act()
+    {
+        if (_player == null)
+            _targetAlive = false;
+        //print("act??");
+        if (_alertedByOther)
+        {
+            print("letsTest");
+            GetComponent<StateMachine>().SetState(StateID.Alerting);
+        }
+    }
 
-	public abstract void Reason ();
+    virtual protected void doDamage()//when would this be used >_>
+    {
+        /*if (_onDamage != null)
+            _onDamage();*/
+    }
+
+    public abstract void Reason ();
 
     public float calcDistanceSqrt(Vector3 otherTransform, Vector3 ownTransform)
     {

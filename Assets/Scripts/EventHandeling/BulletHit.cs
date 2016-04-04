@@ -12,6 +12,24 @@ public class BulletHit : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll)
     {
-        handeler.BulletHitSomething(coll);
+        if (gameObject.name == "ExplosiveBarrel")
+        {
+            StartCoroutine(ExplodeBarrel(gameObject));
+            handeler.BulletHitSomething(coll);
+        }
+
+        else
+            handeler.BulletHitSomething(coll);
+    }
+
+    private IEnumerator ExplodeBarrel(GameObject coll)
+    {
+        SphereCollider exColl = coll.GetComponent<SphereCollider>();
+        GameObject FX = transform.FindChild("FX_explosion").gameObject;
+        FX.SetActive(true);
+        exColl.enabled = true;
+        //After the explosion remove the explosive barrel
+        yield return new WaitForSeconds(1.57f);
+        coll.SetActive(false);
     }
 }

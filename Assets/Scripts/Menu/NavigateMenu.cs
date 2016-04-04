@@ -33,7 +33,13 @@ public class NavigateMenu : MonoBehaviour
     public void PlayGame()
     {
         //Laat hier nog een "Loading" plaatje zien
-		SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
+    }
+
+    //Load the mainmenu
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     //Quits the game

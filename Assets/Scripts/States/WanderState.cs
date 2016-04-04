@@ -41,8 +41,19 @@ public class WanderState : State {
             if(distanceFromPlayer < sightDistancePow)
             {
                 enemySpotted = true;
-                //print("enemy");
-            }
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, sightDistance*0.66f);
+                int i = 0;
+                while (i < hitColliders.Length)
+                {
+                    State otherEntity = hitColliders[i].GetComponent<State>();
+                    //print(hitColliders[i]);
+                    if (otherEntity != null)
+                    {
+                        otherEntity._alertedByOther = true;
+                    }
+                    i++;
+                }
+                            }
             //print(Mathf.Sqrt(distanceFromPlayer)+ "playerdist");
             //print(sightDistance+ "sightdist");
             yield return new WaitForSeconds(0.5f);
@@ -74,15 +85,24 @@ public class WanderState : State {
     }
 
 	public override void Act(){
-        
-
+        base.Act();
     }
 
 	public override void Reason(){
-		if(enemySpotted){
+        if (enemySpotted || _alertedByOther)
+        {
+            if (_alertedByOther)
+                print("welp dis works");
             StopCoroutine("chooseTargetLocation");
             StopCoroutine("checkForPlayer");
-            GetComponent<StateMachine>().SetState(StateID.Alerting);
+            if (this.tag == "citizen")
+            {
+                GetComponent<StateMachine>().SetState(StateID.Fleeing);
+            }
+            if (this.tag == "soldier")
+            {
+                GetComponent<StateMachine>().SetState(StateID.Charge);
+            }
         }
 	}
 }

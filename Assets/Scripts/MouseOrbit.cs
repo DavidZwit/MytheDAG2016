@@ -1,53 +1,64 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 
 public class MouseOrbit : MonoBehaviour
 {
-    public Transform target;
-    private float distance;
-    public float setDistance = 0.1f;
-    public float xSpeed = 10f;
-    public float ySpeed = 10f;
-    public float yMinLimit = -10;
-    public float yMaxLimit = 60;
-    public float x = 0f;
-    public float y = 0f;
+    [SerializeField]
+    private Transform Target;
+    private float Distance;
+    private float setDistance = 20f;
+    private float SpeedX = 10f;
+    private float SpeedY = 10f;
+    private float MinLimitY = -5;
+    private float MaxLimitY = 60;
+    private float X = 0f;
+    private float Y = 0f;
+
+    void Awake()
+    {
+        Target = GameObject.Find("CameraReference").transform;
+    }
 
     // Use this for initialization
     void Start()
     {
         Vector3 angles = transform.eulerAngles;
-        x = angles.y;
-        y = angles.x;
+        X = angles.y;
+        Y = angles.x;
 
         if (gameObject.GetComponent<Rigidbody>())
         {
             gameObject.GetComponent<Rigidbody>().freezeRotation = true;
         }
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log(distance);
-        distance = Raycast3.distance3;
-        if (distance > setDistance)
+        Distance = Raycast3.distance3;
+        if (Distance > setDistance)
         {
-            distance = setDistance;
+            Distance = setDistance;
         }
 
-        if (target)
+        if (Target)
         {
-            x += Input.GetAxisRaw("Mouse X") * xSpeed;
-            y -= Input.GetAxisRaw("Mouse Y") * xSpeed;
+            X += Input.GetAxisRaw("Mouse X") * SpeedX;
+            Y -= Input.GetAxisRaw("Mouse Y") * SpeedY;
 
-            y = ClampAngle(y, yMinLimit, yMaxLimit);
+            Y = ClampAngle(Y, MinLimitY, MaxLimitY);
 
-            Quaternion rotation = Quaternion.Euler(y, x, 0);
-            Vector3 position = rotation * new Vector3(0, 0, -distance) + target.position;
+            Quaternion rotation = Quaternion.Euler(Y, X, 0);
 
+            Vector3 position = rotation * new Vector3(0, 0, -Distance) + Target.position;
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1.0f * Time.deltaTime);
+
+            RaycastHit hit;
+            if (Physics.Linecast(Target.position,this.transform.position, out hit))
+            {
+                Distance -= hit.distance;                
+            }
 
             transform.rotation = rotation;
             transform.position = position;

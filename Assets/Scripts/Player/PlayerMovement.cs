@@ -2,49 +2,46 @@
 using System.Collections;
 
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-
     private Vector3 movementVector = Vector3.zero;
+    private Vector3 CamDirection;
+    private Vector3 targetDirection;
+    private Quaternion playerRotation;
+    private Transform CameraTransform;
     private Rigidbody playerRigidbody;
     public Animator _anim;
-    [SerializeField]
-    private float turnSmoothing = 15f;
-    [SerializeField]
+
+    private bool AudioPlays = false;
+
+    private float MovementSpeed = 12f;
+    private float turnSmoothing = 10f;
+    private float rotateSpeed = 8f;
     private float speedDampTime = 0.1f;
-
-
-    private float speed;
-    private float movementSpeed = 10f;
-
-    private bool Grounded = false;
-    private float minSensitivity = 0.5f;
-
-    private float gravity = 40;
-    private bool isMoving = false;
-    private Quaternion playerRotation;
-    private float turnInput;
-    [SerializeField]
-    private float rotateSpeed = 10f;
+    private float minSensitivity = 0.1f;
     private float Horizontal;
     private float Vertical;
 
-    private Vector3 targetDirection;
 
-    public Transform _camera;
-    private Vector3 CamDirection;
+    private GameObject handler;
+
+
+
+
     // Use this for initialization
 
     void Awake()
     {
+        handler = GameObject.Find("Handeler");
+        CameraTransform = GameObject.Find("Camera").transform;
         movementVector = transform.TransformDirection(Vector3.forward);
-        _camera = transform;
+        CameraTransform = transform;
     }
 
     void Start()
     {
         Cursor.visible = false;
-        speed = movementSpeed;
         playerRotation = transform.rotation;
         playerRigidbody = GetComponent<Rigidbody>();
     }
@@ -54,39 +51,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Horizontal = Input.GetAxisRaw("Horizontal");
         Vertical = Input.GetAxisRaw("Vertical");
-        Movement(Horizontal,Vertical);
-       
-        MouseClick();
-       // Animator();
-    }
+        Movement(Horizontal, Vertical);
 
-    /*void Movement(float h,float v)
-    {
-        if (_camera != null)
-        {
-            // calculate camera relative direction to move
-            CamDirection = Vector3.Scale(_camera.forward, new Vector3(1, 0, 1)).normalized;
-            movementVector = v * CamDirection + h * _camera.right;
-        }
-        else
-        {
-            // we use world-relative directions in the case of no main camera
-            movementVector = v * Vector3.forward + h * Vector3.right;
-        }
-        // Normalise the movement vector and make it proportional to the speed per second.
-        movementVector = movementVector.normalized *  speed * Time.deltaTime;
-        // Move the player to it's current position plus the movement.
-        transform.Translate(movementVector);
-        if (Horizontal != 0f || Vertical != 0f)
-        {
-            // ... set the players rotation and set the speed parameter to 5.3f.
-            Rotating(h, v);
-            _anim.SetFloat("Speed", 1f, speedDampTime, Time.deltaTime);
-        }
-        else
-            // Otherwise set the speed parameter to 0.
-            _anim.SetFloat("Speed", 0);
-    }*/
+        MouseClick();
+    }
 
 
     void Rotating(float h, float v)
@@ -103,50 +71,60 @@ public class PlayerMovement : MonoBehaviour
 
         // Change the players rotation to this new rotation.
         playerRigidbody.MoveRotation(newRotation);
-
-        
-    
     }
-
-    void Animator()
-    { 
-
-    }
-
 
 
     void Movement(float h, float v)
     {
-        movementVector = v * Vector3.forward;
-        //Debug.Log(v * Vector3.forward + h * Vector3.right);
-        if (Horizontal != 0f || Vertical != 0f)
+        if (Horizontal != 0f && Vertical == 0f)
         {
-            // ... set the players rotation and set the speed parameter to 5.3f.
+            movementVector = h * Vector3.forward;
             Rotating(h, v);
             _anim.SetFloat("Speed", 1f, speedDampTime, Time.deltaTime);
-            
+            PlayAudio(6);
+            movementVector = movementVector.normalized * Horizontal * MovementSpeed * Time.deltaTime;
+            transform.Translate(movementVector);
+            return;
         }
-        else {
-            // Otherwise set the speed parameter to 0.
+        else if (Horizontal != 0f || Vertical != 0f)
+        {
+            movementVector = v * Vector3.forward;
+            Rotating(h, v);
+            PlayAudio(6);
+            _anim.SetFloat("Speed", 1f, speedDampTime, Time.deltaTime);
+            movementVector = movementVector.normalized * Vertical * MovementSpeed * Time.deltaTime;
+            // Move the player to it's current position plus the movement.
+            transform.Translate(movementVector);
+            return;
+        }
+        else
+        {
+            StopAudio(6);
             _anim.SetFloat("Speed", 0);
         }
 
-        movementVector = movementVector.normalized * Vertical * speed * Time.deltaTime;
-        // Move the player to it's current position plus the movement.
-        transform.Translate(movementVector);
     }
 
     void MouseClick()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             _anim.SetTrigger("Smash");
+            PlayAudio(10);
         }
     }
 
-    
+    void PlayAudio(int audioID)
+    {
+        handler.GetComponent<SoundManager>().PlayAudioIfNotPlaying(audioID);
+    }
+
+    void StopAudio(int audioID)
+    {
+        handler.GetComponent<SoundManager>().StopAudio(audioID);
+    }
 }
 
-        
+
 
 

@@ -3,7 +3,12 @@ using System.Collections;
 
 public class Lookatcamera : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
+
+    void Awake()
+    {
+        target = GameObject.Find("Camera").transform;
+    }
     void Update()
     {
         transform.LookAt(target);

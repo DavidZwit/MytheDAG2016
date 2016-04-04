@@ -48,9 +48,9 @@ ModelImporter:
     4300008: standard_1
     4300010: Banner_1
     4300012: pCylinder1
-    7400000: idle
-    7400002: shoot
-    7400004: death
+    7400000: Catapult_Idle
+    7400002: Catapult_Shoot
+    7400004: Catapult_Death
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -74,60 +74,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: idle
+      name: Catapult_Idle
       takeName: Take 001
       firstFrame: 1
       lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: arm
-        weight: 1
-      - path: arm/pasted__pCube4
-        weight: 1
-      - path: arm/pasted__pCube4/pasted__polySurface9
-        weight: 1
-      - path: arm/standard_1
-        weight: 1
-      - path: arm/standard_1/Banner_1
-        weight: 1
-      - path: arm/Standard_2
-        weight: 1
-      - path: arm/Standard_2/Banner_2
-        weight: 1
-      - path: pCylinder1
-        weight: 1
-      - path: shotweight
-        weight: 1
-      - path: shotweight/polySurface5
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
-    - serializedVersion: 16
-      name: shoot
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 36
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -174,7 +124,57 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: death
+      name: Catapult_Shoot
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 36
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: arm
+        weight: 1
+      - path: arm/pasted__pCube4
+        weight: 1
+      - path: arm/pasted__pCube4/pasted__polySurface9
+        weight: 1
+      - path: arm/standard_1
+        weight: 1
+      - path: arm/standard_1/Banner_1
+        weight: 1
+      - path: arm/Standard_2
+        weight: 1
+      - path: arm/Standard_2/Banner_2
+        weight: 1
+      - path: pCylinder1
+        weight: 1
+      - path: shotweight
+        weight: 1
+      - path: shotweight/polySurface5
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Catapult_Death
       takeName: Take 001
       firstFrame: 40
       lastFrame: 99

@@ -4,41 +4,33 @@ using System.Collections;
 
 public class OptionAA : MonoBehaviour
 {
-    [SerializeField] private Slider sliderAA;
-    [SerializeField] private Text sliderText;
-    private float sliderValue;
+    private Dropdown dropDown;
+    [HideInInspector] public int _aaValue;
 
-    void Update()
+    void Awake()
     {
-        sliderValue = sliderAA.value;
-        
+        dropDown = GetComponent<Dropdown>();
+        dropDown.value = _aaValue;
+    }
+
+    public void AAChanged(int value)
+    {
+        _aaValue = value;
 
         //Set AA off
-        if (sliderValue == 0)
-        {
+        if (value == 0)
             QualitySettings.antiAliasing = 0;
-            sliderText.text = "Anti Aliasing: Off";
-        }
 
         //Set AA x2
-        else if (sliderValue == 1)
-        {
+        else if (value == 1)
             QualitySettings.antiAliasing = 2;
-            sliderText.text = "Anti Aliasing: 2x";
-        }
 
         //Set AA x4
-        else if (sliderValue == 2)
-        {
+        else if (value == 2)
             QualitySettings.antiAliasing = 4;
-            sliderText.text = "Anti Aliasing: 4x";
-        }
 
         //Set AA x8
-        else if (sliderValue == 3)
-        {
+        else if (value == 3)
             QualitySettings.antiAliasing = 8;
-            sliderText.text = "Anti Aliasing: 8x";
-        }
     }
 }
