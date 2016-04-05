@@ -38,7 +38,10 @@ public abstract class State : MonoBehaviour {
     public virtual void Act()
     {
         if (_player == null)
+        {
             _targetAlive = false;
+            _player = GameObject.FindGameObjectWithTag("Player");
+        }
         //print("act??");
         if (_alertedByOther)
         {
