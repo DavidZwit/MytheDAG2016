@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
 	[SerializeField] private GameObject mainmenu;
 	[SerializeField] private GameObject menuLayout;
 	[SerializeField] private GameObject cam;
+	[SerializeField] private GameObject hitFXPanel;
 
 	MouseOrbit mouseOr;
 
@@ -21,7 +22,6 @@ public class PauseMenu : MonoBehaviour
 	{
 		mouseOr = cam.GetComponent<MouseOrbit>();
 		mouseOr.enabled = true;
-		pausedMenu.SetActive (false);
 	}
 
 	// Update is called once per frame
@@ -38,6 +38,7 @@ public class PauseMenu : MonoBehaviour
 			Cursor.visible = true;
 			Time.timeScale = 0;
 			mouseOr.enabled = false;
+			hitFXPanel.SetActive (false);
 		} 
 		else if(!isPaused)
 		{
@@ -50,6 +51,7 @@ public class PauseMenu : MonoBehaviour
 			Time.timeScale = 1;
 			Cursor.visible = false;
 			mouseOr.enabled = true;
+			hitFXPanel.SetActive (true);
 		}
 	}
 
@@ -72,6 +74,7 @@ public class PauseMenu : MonoBehaviour
 		isPaused = false;
 		Cursor.visible = false;
 		mouseOr.enabled = true;
+		hitFXPanel.SetActive (true);
 		Time.timeScale = 1;
 	}
 }

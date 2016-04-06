@@ -8,14 +8,15 @@ public class HealthBar : MonoBehaviour {
 	[SerializeField] GameObject healthImage;
 	[SerializeField] private float health = 5f;
 	[SerializeField] private float maxHealth = 100f;
-	//[SerializeField] private float healthRemoval = 0.5f;
-	//[SerializeField] private float healthHitPoints = 10f;
 	[SerializeField] private float smoothTime = 0.1f;
 	[SerializeField] private float damageTaken = 10f;
+	OnHitFX hitFX;
+
 	private float velocity;
 
 	void Start() 
 	{
+		hitFX = GameObject.Find ("HitFXImage").GetComponent<OnHitFX> ();
 		//makes the scale of the adrenaline bar.
 		healthImage.transform.localScale = new Vector3(health / 50, 0.2f, 0);
 	}
@@ -64,6 +65,9 @@ public class HealthBar : MonoBehaviour {
 	{
 		//Player Takes Damage from projectile
 		health -= damageTaken;
+
+		hitFX.TurnOn (0.08f);
+
 	}
 
 }
