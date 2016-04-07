@@ -64,7 +64,7 @@ public class EventHandeler : MonoBehaviour
 
     public void BulletHitSomething(Collision coll)
     {
-        if (coll.gameObject.tag == "Breakable")
+        if (coll.gameObject.tag == "Wall")
         {
             coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
 

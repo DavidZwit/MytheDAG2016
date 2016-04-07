@@ -18,7 +18,7 @@ public class BulletHit : MonoBehaviour {
             handeler.BulletHitSomething(coll);
         }
 
-        else
+        else if (coll.gameObject.tag != "Wall")
             handeler.BulletHitSomething(coll);
     }
 
