@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class EventHandeler : MonoBehaviour
 {
-
+    SpawnExplosiveBarrel spawnExplosiveBarrel;
     RandomShake screenShake;
 
     public delegate void ReachedObjective();
@@ -25,6 +25,7 @@ public class EventHandeler : MonoBehaviour
         rampageBar = GameObject.Find("RampageBar").GetComponent<RampageBar>();
         healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         scoreAdd = GetComponent<AddScore>();
+        spawnExplosiveBarrel = GetComponent<SpawnExplosiveBarrel>();
         screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
     }
 
@@ -47,10 +48,10 @@ public class EventHandeler : MonoBehaviour
 
     public void SomethingBroke(GameObject coll)
     {
-        //scoreAdd.IncreaseScore(100);
+        scoreAdd.IncreaseScore(100);
         //screenShake.Shake(new Vector2(0.5f, 0.3f), 0.8f, 0.01f);
         coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
-
+        spawnExplosiveBarrel.AddSpawnChance(coll.gameObject);
         //Adds Adrenaline
         //adrenalineBar.Adrenaline++;
 
@@ -65,7 +66,10 @@ public class EventHandeler : MonoBehaviour
         if (coll.gameObject.tag == "Breakable")
         {
             coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
-           
+        }
+        else if (coll.gameObject.tag == "Wall")
+        {
+            coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
         }
     }
     

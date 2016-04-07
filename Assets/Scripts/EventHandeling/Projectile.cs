@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
     {
         Rigidbody rb = coll.GetComponent<Rigidbody>();
         coll.transform.parent = player;
-        coll.transform.position = new Vector3 (player.position.x, player.position.y + 12, player.position.z);
+        coll.transform.position = new Vector3(player.position.x, player.position.y + 12, player.position.z);
         rb.isKinematic = true;
         rb.useGravity = false;
     }
@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
         rb.useGravity = true;
         coll.transform.parent = null;
         rb.AddForce(player.transform.forward * 2500);
-        if (coll.name == "ExplosiveBarrel")
+        if (coll.name == "ExplosiveBarrel" || coll.name == "ExplosiveBarrel(Clone)")
             coll.AddComponent<BulletHit>();
     }
 }

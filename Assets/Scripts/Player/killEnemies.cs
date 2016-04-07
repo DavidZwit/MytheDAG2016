@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class killEnemies : MonoBehaviour {
+public class killEnemies : MonoBehaviour
+{
     [SerializeField]
     private Transform cube;
     public bool _knockup;
@@ -13,7 +14,7 @@ public class killEnemies : MonoBehaviour {
         handler = GameObject.Find("Handeler");
         events = handler.GetComponent<EventHandeler>();
         _knockup = false;
-    } 
+    }
 
     public void attacking()
     {
@@ -21,15 +22,15 @@ public class killEnemies : MonoBehaviour {
         Collider[] hitColliders = Physics.OverlapSphere(cube.position, 5);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            if(hitColliders[i].tag == "Breakable")
+            if (hitColliders[i].tag == "Breakable")
             {
                 //print("shrekt");
                 events.SomethingBroke(hitColliders[i].gameObject);
             }
-            IDamageable damageableObject =  hitColliders[i].GetComponent<IDamageable>();
+            IDamageable damageableObject = hitColliders[i].GetComponent<IDamageable>();
             if (damageableObject != null)//"if object has idamagable"
             {
-                damageableObject.TakeDamg(1000);//damage it
+                damageableObject.TakeDamg(100);//damage it
             }
         }
         /*Collider[] knockColliders = Physics.OverlapSphere(cube.position, 8);

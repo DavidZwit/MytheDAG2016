@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletHit : MonoBehaviour {
+public class BulletHit : MonoBehaviour
+{
 
     EventHandeler handeler;
 
@@ -12,13 +13,13 @@ public class BulletHit : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll)
     {
-        if (gameObject.name == "ExplosiveBarrel")
+        if (gameObject.name == "ExplosiveBarrel" || gameObject.name == "ExplosiveBarrel(Clone)")
         {
             StartCoroutine(ExplodeBarrel(gameObject));
             handeler.BulletHitSomething(coll);
         }
 
-        else
+        else if (coll.gameObject.tag != "Wall")
             handeler.BulletHitSomething(coll);
     }
 
