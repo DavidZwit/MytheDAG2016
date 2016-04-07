@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class Raycast3 : MonoBehaviour {
-    public static float distance3 = 5;
+    public static float distance3 = 20;
 	
 	void Update () {
         RaycastHit hit;

@@ -67,33 +67,8 @@ public class EventHandeler : MonoBehaviour
             coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
            
         }
-        else if (coll.gameObject.tag == "Player")
-        {
-            //Decreases Adrenaline when hit.
-            //adrenalineBar.DamageTaken ();
-
-            //rampageBar.RampageDamageTaken ();
-            //print(coll.gameObject.name);
-            healthBar.HealthDamageTaken();
-            //print("print me");
-
-            //For the effect of the hit
-        }
     }
-
-    /*
-	void AdrenalineBarDecreasing()
-	{
-		//Decreases the adrenalineBar every few seconds.
-		adrenalineBar.Adrenaline -= 5f;
-		//If the adrenalineBar hits zero, load the following Scene.
-		if(adrenalineBar.Adrenaline <= 0f)
-		{
-			SceneManager.LoadScene ("StartMenu");
-		}
-	}
-	*/
-
+    
     IEnumerator RampageBarDecreasing()
     {
         while (true)

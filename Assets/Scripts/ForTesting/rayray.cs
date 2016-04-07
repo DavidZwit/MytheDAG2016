@@ -55,7 +55,7 @@ public class rayray : MonoBehaviour {
         IDamageable damageableObject = hit.collider.GetComponent<IDamageable>();//check for component idamagable on the hit object
         if (damageableObject != null)//"if object has idamagable"
         {
-            damageableObject.TakeDamg(1);//damage it
+            damageableObject.TakeDamg(1000);//damage it
         }
         cube.position = hit.point;
         cube.rotation = Quaternion.LookRotation(hit.normal);

@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class SpawnSystem : MonoBehaviour {
+public class SpawnSystem : MonoBehaviour
+{
 
     //Scripts
     [SerializeField]
@@ -42,8 +43,8 @@ public class SpawnSystem : MonoBehaviour {
     [HideInInspector]
     public int _percentHP;//percentage hp wat er bij komt
     public int _percentSpeed;//percentage movementspeed wat er bij komt
-    public int _percentMoney;//percentage money(recources)
-                             //Int
+    public int _percentDamage;//percentage money(recources)
+                              //Int
 
     //GameObject
 
@@ -69,17 +70,17 @@ public class SpawnSystem : MonoBehaviour {
     {
         //if(wavesCounter>= 1)
         //{
-            spawnCheck();
-            WavesCheck();
+        spawnCheck();
+        WavesCheck();
         //}
-        
+
     }
     void WavesCheck()
     {
         if (waveDone)
         {
-            
-            
+
+
         }
     }
     void spawnCheck()
@@ -94,7 +95,7 @@ public class SpawnSystem : MonoBehaviour {
             //print("ello" + enemy);
             if (_112233)//functie die er voor zorgt dat als 112233 true is dat de eerste eerst worden gespawned dan de 2e en dan de 3e
             {
-                if(currentWave.enemyCount1 != 0)
+                if (currentWave.enemyCount1 != 0)
                 {
                     currentEnemy = enemies[0];
                     enemy = currentEnemy.enemy;
@@ -125,7 +126,7 @@ public class SpawnSystem : MonoBehaviour {
                     currentWave.enemyCount5--;
                 }
             }
-            if(spawnpointDivider >= spawnpoints.Length)
+            if (spawnpointDivider >= spawnpoints.Length)
             {
                 spawnpointDivider = 0;
             }
@@ -151,7 +152,7 @@ public class SpawnSystem : MonoBehaviour {
     void OnEnemyDeath()//decreases the int enemies alive and checks if next wave can start
     {
         enemiesAlive--;
-        if(enemiesAlive == 0)
+        if (enemiesAlive == 0)
         {
             waveDone = true;
 
@@ -168,7 +169,7 @@ public class SpawnSystem : MonoBehaviour {
         enemiesAlive = enemiesToSpawn;
         _percentHP += currentWave.addedPercentageHealth;
         _percentSpeed += currentWave.addedPercentageMovespeed;
-        _percentMoney += currentWave.addedPercentageDeathMoney;
+        _percentDamage += currentWave.addedPercentageDamage;
     }
 
     [System.Serializable]
@@ -193,8 +194,8 @@ public class SpawnSystem : MonoBehaviour {
         public float spawnTime;//how much time inbetween enemy spawns
         public int addedPercentageHealth;//each ennemy has a static(not yet static this version) base health that wont be changed, to make each wave harder the health that the enemy starts with is baseHealth + (basehealth/100 * addedPercentageHealth). 
         public int addedPercentageMovespeed;//each ennemy has a static(not yet static this version) base movespeed that wont be changed, to make each wave harder the speed that the enemy starts with is baseHealth + (basespeed/100 * addedPercentageMovespeed).
-        public int addedPercentageDeathMoney;//each ennemy has a static(not yet static this version) base gold reward for when de enemy gets killed .
-                                             //why percentage? if i add +2 hp each round it makes later on the difrense between tanks and other units insignificant, round 1 tank 10hp speedster 3hp, round 15 tank 40hp speedster 33hp now we have a tanky speedster wich is op or a weak tank. percentage fixes that and same goes for th speed.
+        public int addedPercentageDamage;//each ennemy has a static(not yet static this version) base gold reward for when de enemy gets killed .
+                                         //why percentage? if i add +2 hp each round it makes later on the difrense between tanks and other units insignificant, round 1 tank 10hp speedster 3hp, round 15 tank 40hp speedster 33hp now we have a tanky speedster wich is op or a weak tank. percentage fixes that and same goes for th speed.
         public Wave ShallowCopy()
         {
             return (Wave)this.MemberwiseClone();
@@ -220,7 +221,7 @@ public class SpawnSystem : MonoBehaviour
     public float spawnTime;//how much time inbetween enemy spawns
     public int addedPercentageHealth;//each ennemy has a static(not yet static this version) base health that wont be changed, to make each wave harder the health that the enemy starts with is baseHealth + (basehealth/100 * addedPercentageHealth). 
     public int addedPercentageMovespeed;//each ennemy has a static(not yet static this version) base movespeed that wont be changed, to make each wave harder the speed that the enemy starts with is baseHealth + (basespeed/100 * addedPercentageMovespeed).
-    public int addedPercentageDeathMoney;
+    public int addedPercentageDamage;
 
     [SerializeField]
     private EnemyKind[] enemies;//import enemy class
@@ -258,7 +259,7 @@ public class SpawnSystem : MonoBehaviour
     [HideInInspector]
     public int _percentHP;//percentage hp wat er bij komt
     public int _percentSpeed;//percentage movementspeed wat er bij komt
-    public int _percentMoney;//percentage money(recources)
+    public int _percentDamage;//percentage money(recources)
                              //Int
 
     //GameObject
@@ -389,7 +390,7 @@ public class SpawnSystem : MonoBehaviour
         enemiesAlive = enemiesToSpawn;
         _percentHP = addedPercentageHealth;
         _percentSpeed = addedPercentageMovespeed;
-        _percentMoney = addedPercentageDeathMoney;
+        _percentDamage = addedPercentageDamage;
     }
 
     [System.Serializable]
@@ -414,7 +415,7 @@ public class SpawnSystem : MonoBehaviour
         public float spawnTime;//how much time inbetween enemy spawns
         public int addedPercentageHealth;//each ennemy has a static(not yet static this version) base health that wont be changed, to make each wave harder the health that the enemy starts with is baseHealth + (basehealth/100 * addedPercentageHealth). 
         public int addedPercentageMovespeed;//each ennemy has a static(not yet static this version) base movespeed that wont be changed, to make each wave harder the speed that the enemy starts with is baseHealth + (basespeed/100 * addedPercentageMovespeed).
-        public int addedPercentageDeathMoney;//each ennemy has a static(not yet static this version) base gold reward for when de enemy gets killed .
+        public int addedPercentageDamage;//each ennemy has a static(not yet static this version) base gold reward for when de enemy gets killed .
         //why percentage? if i add +2 hp each round it makes later on the difrense between tanks and other units insignificant, round 1 tank 10hp speedster 3hp, round 15 tank 40hp speedster 33hp now we have a tanky speedster wich is op or a weak tank. percentage fixes that and same goes for th speed.
     }
 }

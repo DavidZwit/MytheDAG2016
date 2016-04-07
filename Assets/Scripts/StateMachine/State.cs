@@ -13,10 +13,16 @@ public abstract class State : MonoBehaviour {
     protected bool _targetAlive;
     [HideInInspector]
     protected Animator _anim;
+    [HideInInspector]
+    protected GameObject _findSpawner;//finds spawner object
+    [HideInInspector]
+    protected SpawnSystem _waveStats;//imports spawnsystem
 
 
     public virtual void Enter ()
 	{
+        _findSpawner = GameObject.Find("unitSpawner");
+        _waveStats = _findSpawner.GetComponent<SpawnSystem>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _alertedByOther = false;
         if (_player != null)
@@ -32,7 +38,10 @@ public abstract class State : MonoBehaviour {
     public virtual void Act()
     {
         if (_player == null)
+        {
             _targetAlive = false;
+            _player = GameObject.FindGameObjectWithTag("Player");
+        }
         //print("act??");
         if (_alertedByOther)
         {

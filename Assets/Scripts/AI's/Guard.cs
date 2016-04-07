@@ -18,17 +18,29 @@ public class Guard : LivingEntity
     /** we declareren de statemachine */
     private StateMachine stateMachine;
     private Animator anim;
+    private SpawnSystem waveStats;//imports spawnsystem
     [SerializeField]
     private bool patrol;
     [SerializeField]
     private bool charge;
 
-    // Use this for initialization
+    public bool _alive;
+
+    private GameObject findSpawner;//finds spawner object
+
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+        _alive = true;
+        findSpawner = GameObject.Find("unitSpawner");
+        waveStats = findSpawner.GetComponent<SpawnSystem>();
+    }
     protected override void Start()
     {
         base.Start();//gets the start from living entity
-        //_startingHealth = _baseHp;
-        //print(health + "hp");
+        startingHealth += startingHealth/100*waveStats._percentHP;
+        health = startingHealth;
+        print(health + "hp");
         /** we halen een referentie op naar de state machine */
         stateMachine = GetComponent<StateMachine>();
         //anim.GetComponent<Animator>();
@@ -54,7 +66,8 @@ public class Guard : LivingEntity
     protected override void death()
     {
         base.death();//gets the death from living entity
-        //anim.SetBool("alive", false);
+        _alive = false;
+        anim.SetBool("alive", false);
     }
 
     void MakeStates() {
