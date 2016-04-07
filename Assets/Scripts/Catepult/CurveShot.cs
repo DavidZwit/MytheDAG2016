@@ -16,13 +16,13 @@ public class CurveShot : MonoBehaviour
     [SerializeField]
     private Transform projectile;
     RandomShake screenShake;
-    private GameObject handler;
+    private SoundManager sound;
 
     public bool _curveShootAnim = false;
 
     void Awake()
     {
-        handler = GameObject.Find("Handeler");
+        sound = GameObject.Find("Handeler").GetComponent<SoundManager>();
         //With the invokeReapeat the catapult can shoot more then 1 projectile.
         InvokeRepeating("CoroutineProjectile", 1, 5);
         screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
@@ -44,7 +44,7 @@ public class CurveShot : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
 
 
-        PlayAudio(1);
+        sound.PlayAudio(1);
         //Sets the Catapult Animation True
         _curveShootAnim = true;
         // Move projectile to the position of throwing object + add some offset if needed.
@@ -86,11 +86,5 @@ public class CurveShot : MonoBehaviour
         _curveShootAnim = false;
 
     }
-
-    void PlayAudio(int audioID)
-    {
-        handler.GetComponent<SoundManager>().PlayAudioIfNotPlaying(audioID);
-    }
-
 
 }

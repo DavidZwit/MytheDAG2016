@@ -11,7 +11,9 @@ public class HealthBar : MonoBehaviour {
 	//[SerializeField] private float healthRemoval = 0.5f;
 	//[SerializeField] private float healthHitPoints = 10f;
 	[SerializeField] private float smoothTime = 0.1f;
-
+    PlayerMovement player;
+    SoundManager sound;
+    HideMouse cursor;
     OnHitFX hitFx;
 
     private float velocity;
@@ -22,7 +24,10 @@ public class HealthBar : MonoBehaviour {
         //makes the scale of the adrenaline bar.
         hitFx = GameObject.Find("HitFXImage").GetComponent<OnHitFX>();
 		healthImage.transform.localScale = new Vector3(health / 50, 0.2f, 0);
-	}
+        sound = GameObject.Find("Handeler").GetComponent<SoundManager>();
+        player = GameObject.Find("Player(Goliath)").GetComponent<PlayerMovement>();
+        cursor = GameObject.Find("CursorLock").GetComponent<HideMouse>();
+    }
 
 	/*
 	public float Health
@@ -60,10 +65,11 @@ public class HealthBar : MonoBehaviour {
 		transform.localScale = new Vector3 (newX, transform.localScale.y, transform.localScale.z);
 		if (health <= 0f) 
 		{
-            Cursor.visible = true;
-
             SceneManager.LoadScene(0);
-		}
+            cursor.UnlockCursor();
+            player._anim.SetTrigger("Death");
+            sound.PlayAudio(16);
+        }
 	}
 
 	public void HealthDamageTaken(float damageTaken)

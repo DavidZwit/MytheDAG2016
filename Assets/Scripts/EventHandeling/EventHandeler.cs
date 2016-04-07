@@ -14,6 +14,7 @@ public class EventHandeler : MonoBehaviour
     RampageBar rampageBar;
     HealthBar healthBar;
     AddScore scoreAdd;
+    SoundManager sound;
     [SerializeField]
     [Range(0, 100)]
     int perCentWonCodition;
@@ -27,6 +28,7 @@ public class EventHandeler : MonoBehaviour
         scoreAdd = GetComponent<AddScore>();
         spawnExplosiveBarrel = GetComponent<SpawnExplosiveBarrel>();
         screenShake = GameObject.Find("Camera").GetComponent<RandomShake>();
+        sound = GameObject.Find("Handeler").GetComponent<SoundManager>();
     }
 
     void Start()
@@ -58,7 +60,10 @@ public class EventHandeler : MonoBehaviour
         rampageBar.Rampage++;
 
         if (coll.gameObject.name == "kasteel_model")
+        {
             SceneManager.LoadScene(0);
+            sound.PlayAudio(20);
+        }
     }
 
     public void BulletHitSomething(Collision coll)

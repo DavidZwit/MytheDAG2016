@@ -14,8 +14,11 @@ public class PlayerMovement : MonoBehaviour
     public Animator _anim;
 
     private bool AudioPlays = false;
+    private bool Run = false;
 
-    private float MovementSpeed = 12f;
+    private float speed;
+    private float WalkSpeed = 12f;
+    private float RunSpeed = 18f;
     private float turnSmoothing = 10f;
     private float rotateSpeed = 8f;
     private float speedDampTime = 0.1f;
@@ -24,16 +27,13 @@ public class PlayerMovement : MonoBehaviour
     private float Vertical;
 
 
-    private GameObject handler;
-
-
-
-
-    // Use this for initialization
+    SoundManager sounds;
 
     void Awake()
     {
-        handler = GameObject.Find("Handeler");
+        speed = WalkSpeed;
+        playerRigidbody = GetComponent<Rigidbody>();
+        sounds = GameObject.Find("Handeler").GetComponent<SoundManager>();
         CameraTransform = GameObject.Find("Camera").transform;
         movementVector = transform.TransformDirection(Vector3.forward);
         CameraTransform = transform;
@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
         playerRotation = transform.rotation;
         playerRigidbody = GetComponent<Rigidbody>();
     }
@@ -76,13 +75,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement(float h, float v)
     {
+
         if (Horizontal != 0f && Vertical == 0f)
         {
             movementVector = h * Vector3.forward;
             Rotating(h, v);
-            _anim.SetFloat("Speed", 1f, speedDampTime, Time.deltaTime);
-            PlayAudio(6);
-            movementVector = movementVector.normalized * Horizontal * MovementSpeed * Time.deltaTime;
+            _anim.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
+            PlayAudio(12);
+            movementVector = movementVector.normalized * Horizontal * speed * Time.deltaTime;
             transform.Translate(movementVector);
             return;
         }
@@ -90,17 +90,17 @@ public class PlayerMovement : MonoBehaviour
         {
             movementVector = v * Vector3.forward;
             Rotating(h, v);
-            PlayAudio(6);
-            _anim.SetFloat("Speed", 1f, speedDampTime, Time.deltaTime);
-            movementVector = movementVector.normalized * Vertical * MovementSpeed * Time.deltaTime;
+            PlayAudio(12);
+            _anim.SetFloat("Speed", speed, speedDampTime, Time.deltaTime);
+            movementVector = movementVector.normalized * Vertical * speed * Time.deltaTime;
             // Move the player to it's current position plus the movement.
             transform.Translate(movementVector);
             return;
         }
         else
         {
-            StopAudio(6);
             _anim.SetFloat("Speed", 0);
+            //PlayAudio(8);
         }
 
     }
@@ -109,20 +109,37 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            _anim.SetTrigger("Smash");
+            _anim.SetTrigger("Attack");
             PlayAudio(10);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayAudio(7);
+            _anim.SetTrigger("Slam");
+            PlayAudio(10);
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = RunSpeed;
+            return;
+        }
+        else
+        {
+            speed = WalkSpeed;
         }
     }
 
     void PlayAudio(int audioID)
     {
-        handler.GetComponent<SoundManager>().PlayAudioIfNotPlaying(audioID);
+        sounds.PlayAudioIfNotPlaying(audioID);
     }
 
     void StopAudio(int audioID)
     {
-        handler.GetComponent<SoundManager>().StopAudio(audioID);
+        sounds.StopAudio(audioID);
     }
+
 }
 
 

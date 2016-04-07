@@ -5,11 +5,13 @@ public class TrapClaw : MonoBehaviour
 {
     private bool canTrap = true;
     private PlayerMovement movement;
+    private SoundManager sound;
     private Animator anim;
 
     void Awake()
     {
         movement = GameObject.Find("Player(Goliath)").GetComponent<PlayerMovement>();
+        sound = GameObject.Find("Handeler").GetComponent<SoundManager>();
         anim = GetComponent<Animator>();
     }
 
@@ -29,6 +31,7 @@ public class TrapClaw : MonoBehaviour
                 //Stuck player position
                 anim.SetBool("isCaught", true);
                 canTrap = false;
+                sound.PlayAudio(0);
                 movement.enabled = false;
                 yield return new WaitForSeconds(2f);
                 //Set player free

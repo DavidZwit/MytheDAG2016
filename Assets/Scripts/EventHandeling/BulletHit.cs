@@ -3,12 +3,13 @@ using System.Collections;
 
 public class BulletHit : MonoBehaviour
 {
-
     EventHandeler handeler;
+    SoundManager sound;
 
     void Awake()
     {
         handeler = GameObject.Find("Handeler").GetComponent<EventHandeler>();
+        sound = GameObject.Find("Handeler").GetComponent<SoundManager>();
     }
 
     void OnCollisionEnter(Collision coll)
@@ -20,7 +21,10 @@ public class BulletHit : MonoBehaviour
         }
 
         else if (coll.gameObject.tag != "Wall")
+        {
             handeler.BulletHitSomething(coll);
+        }
+        sound.PlayAudio(14);
     }
 
     private IEnumerator ExplodeBarrel(GameObject coll)
