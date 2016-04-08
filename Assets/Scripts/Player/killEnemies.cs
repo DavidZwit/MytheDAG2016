@@ -30,7 +30,7 @@ public class killEnemies : MonoBehaviour
             IDamageable damageableObject = hitColliders[i].GetComponent<IDamageable>();
             if (damageableObject != null)//"if object has idamagable"
             {
-                damageableObject.TakeDamg(50);//damage it
+                damageableObject.TakeDamg(500);//damage it
             }
         }
         /*Collider[] knockColliders = Physics.OverlapSphere(cube.position, 8);

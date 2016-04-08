@@ -40,7 +40,7 @@ public class Guard : LivingEntity
         base.Start();//gets the start from living entity
         startingHealth += startingHealth/100*waveStats._percentHP;
         health = startingHealth;
-        print(health + "hp");
+        //print(health + "hp");
         /** we halen een referentie op naar de state machine */
         stateMachine = GetComponent<StateMachine>();
         //anim.GetComponent<Animator>();

@@ -44,7 +44,7 @@ public class EventHandeler : MonoBehaviour
         set
         {
             breakableObjects = value;
-            if (breakableObjects < brokenObjectsNeededLeft) _ObjectiveReached();
+            if (breakableObjects < brokenObjectsNeededLeft) { } //_ObjectiveReached();
         }
     }
 

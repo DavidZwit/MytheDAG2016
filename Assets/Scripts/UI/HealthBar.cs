@@ -26,7 +26,7 @@ public class HealthBar : MonoBehaviour {
 		healthImage.transform.localScale = new Vector3(health / 50, 0.2f, 0);
         sound = GameObject.Find("Handeler").GetComponent<SoundManager>();
         player = GameObject.Find("Player(Goliath)").GetComponent<PlayerMovement>();
-        cursor = GameObject.Find("CursorLock").GetComponent<HideMouse>();
+        cursor = GameObject.Find("Camera").GetComponent<HideMouse>();
     }
 
 	/*
