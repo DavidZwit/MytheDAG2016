@@ -19,7 +19,7 @@ public class killEnemies : MonoBehaviour
     public void attacking()
     {
         //print("seconds test 2");
-        Collider[] hitColliders = Physics.OverlapSphere(cube.position, 5);
+        Collider[] hitColliders = Physics.OverlapSphere(cube.position, 7);
         for (int i = 0; i < hitColliders.Length; i++)
         {
             if (hitColliders[i].tag == "Breakable")
@@ -30,7 +30,7 @@ public class killEnemies : MonoBehaviour
             IDamageable damageableObject = hitColliders[i].GetComponent<IDamageable>();
             if (damageableObject != null)//"if object has idamagable"
             {
-                damageableObject.TakeDamg(100);//damage it
+                damageableObject.TakeDamg(50);//damage it
             }
         }
         /*Collider[] knockColliders = Physics.OverlapSphere(cube.position, 8);

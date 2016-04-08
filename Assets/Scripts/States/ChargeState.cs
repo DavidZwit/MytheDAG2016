@@ -46,7 +46,7 @@ public class ChargeState : State
                     //print(_player.gameObject);
                     agent.SetDestination(_player.transform.position);
                     distanceFromPlayer = calcDistanceSqrt(_player.transform.position, transform.position);
-                    if (distanceFromPlayer < 100)
+                    if (distanceFromPlayer < 50)
                     {
                         atackMove = true;
                         _anim.SetBool("attacking", atackMove);
@@ -81,7 +81,7 @@ public class ChargeState : State
             Vector3 dirToTarget = (_player.transform.position - transform.position).normalized;
             Vector3 attackPosition = _player.transform.position - dirToTarget * (2);
 
-            float attackSpeed = 1;
+            //float attackSpeed = 0.8f;
             float percent = 0;
 
             bool hasAppliedDamage = false;
@@ -96,9 +96,9 @@ public class ChargeState : State
                     //_player.TakeDamage(damage);
                 }
 
-                percent += Time.deltaTime * attackSpeed;
-                interpolation = ((-Mathf.Pow(percent, 2) + percent) * 2) + 0.2f;
-                transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
+                //percent += Time.deltaTime * attackSpeed;
+                //interpolation = ((-Mathf.Pow(percent, 2) + percent) * 2) + 0.2f;
+               //transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
 
                 yield return null;
             }
