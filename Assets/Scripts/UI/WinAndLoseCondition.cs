@@ -26,25 +26,25 @@ public class WinAndLoseCondition : MonoBehaviour {
 	public void Win()
 	{
 		isEndCondition = true;
-			lose.SetActive (false);
-			win.SetActive (true);
-			Cursor.visible = true;
-			mouseOr.enabled = false;
-			returnMenu.SetActive (true);
-			restart.SetActive (true);
-			Time.timeScale = 0;
+		lose.SetActive (false);
+		win.SetActive (true);
+		Cursor.visible = true;
+		mouseOr.enabled = false;
+		returnMenu.SetActive (true);
+		restart.SetActive (true);
+		Time.timeScale = 0;
 	}
 
 	public void Lose()
 	{
 		isEndCondition = true;
-			win.SetActive (false);
-			lose.SetActive (true);
-			Cursor.visible = true;
-			mouseOr.enabled = false;
-			returnMenu.SetActive (true);
-			restart.SetActive (true);
-			Time.timeScale = 0;
+		win.SetActive (false);
+		lose.SetActive (true);
+		Cursor.visible = true;
+		mouseOr.enabled = false;
+		returnMenu.SetActive (true);
+		restart.SetActive (true);
+		Time.timeScale = 0;
 	}
 
 }

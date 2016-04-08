@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour {
 	{
         //makes the scale of the adrenaline bar.
         hitFx = GameObject.Find("HitFXImage").GetComponent<OnHitFX>();
-		healthImage.transform.localScale = new Vector3(health / 50, 0.2f, 0);
+		healthImage.transform.localScale = new Vector3(health / 72, 0.2f, 0);
         sound = GameObject.Find("Handeler").GetComponent<SoundManager>();
         player = GameObject.Find("Player(Goliath)").GetComponent<PlayerMovement>();
     }
@@ -59,7 +59,7 @@ public class HealthBar : MonoBehaviour {
 	void Update()
 	{
 		//updates the adrenaline bar smooth when the points go up or down.
-		float newX = Mathf.SmoothDamp (transform.localScale.x, health/50 - 0.02f, ref velocity, smoothTime);
+		float newX = Mathf.SmoothDamp (transform.localScale.x, health/72 - 0.02f, ref velocity, smoothTime);
 		transform.localScale = new Vector3 (newX, transform.localScale.y, transform.localScale.z);
 		if (health <= 0f) 
 		{
