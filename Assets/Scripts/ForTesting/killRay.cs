@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class rayray : MonoBehaviour {
+public class killRay : MonoBehaviour {
     
     [SerializeField]
     private float maxFireRange;

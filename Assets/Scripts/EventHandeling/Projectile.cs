@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
     //Sets the projectile as a child of the player, freeze it and change its position
     public void PickupProjectile(GameObject coll)
     {
-        sound.PlayAudio(17);
+        //sound.PlayAudio(17);
         Rigidbody rb = coll.GetComponent<Rigidbody>();
         coll.transform.parent = player;
         coll.transform.position = new Vector3(player.position.x, player.position.y + 12, player.position.z);

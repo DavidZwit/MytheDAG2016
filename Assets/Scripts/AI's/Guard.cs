@@ -9,7 +9,8 @@ public enum StateID
 	Alerting = 2,
 	Fleeing = 3,
     Charge = 4,
-    Patrol = 5
+    Patrol = 5,
+    death = 6
 }
 
 public class Guard : LivingEntity
@@ -40,7 +41,7 @@ public class Guard : LivingEntity
         base.Start();//gets the start from living entity
         startingHealth += startingHealth/100*waveStats._percentHP;
         health = startingHealth;
-        //print(health + "hp");
+        print(health + "hp");
         /** we halen een referentie op naar de state machine */
         stateMachine = GetComponent<StateMachine>();
         //anim.GetComponent<Animator>();
@@ -68,6 +69,7 @@ public class Guard : LivingEntity
         base.death();//gets the death from living entity
         _alive = false;
         anim.SetBool("alive", false);
+        stateMachine.SetState(StateID.death);
     }
 
     void MakeStates() {
@@ -76,6 +78,7 @@ public class Guard : LivingEntity
 		stateMachine.AddState( StateID.Fleeing, GetComponent<FleeState>() );
 		stateMachine.AddState( StateID.Charge, GetComponent<ChargeState>() );
         stateMachine.AddState(StateID.Patrol, GetComponent<PatrolState>() );
+        stateMachine.AddState(StateID.death, GetComponent<DeathState>());
     }
 
 }

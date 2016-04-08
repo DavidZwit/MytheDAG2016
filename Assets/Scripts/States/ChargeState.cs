@@ -81,7 +81,7 @@ public class ChargeState : State
             Vector3 dirToTarget = (_player.transform.position - transform.position).normalized;
             Vector3 attackPosition = _player.transform.position - dirToTarget * (2);
 
-            //float attackSpeed = 0.8f;
+            float attackSpeed = 1f;
             float percent = 0;
 
             bool hasAppliedDamage = false;
@@ -96,9 +96,7 @@ public class ChargeState : State
                     //_player.TakeDamage(damage);
                 }
 
-                //percent += Time.deltaTime * attackSpeed;
-                //interpolation = ((-Mathf.Pow(percent, 2) + percent) * 2) + 0.2f;
-               //transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
+                percent += Time.deltaTime * attackSpeed;
 
                 yield return null;
             }
@@ -112,6 +110,7 @@ public class ChargeState : State
         {
             base.doDamage();
             hpBar.HealthDamageTaken(dammage);
+            agent.speed = 0;
             //print("god help me");
         }
     }
@@ -124,6 +123,7 @@ public class ChargeState : State
         }
         else
         {
+            _anim.SetBool("alive", false);
             StopAllCoroutines();
         }
     }

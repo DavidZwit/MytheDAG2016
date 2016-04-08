@@ -20,7 +20,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
         health -= damage;
         if (health <= 0 && !dead)
         {
-            Invoke("death",0);
+            Invoke("death",0.5f);
 
             //print("killed by mayro minion");
         }

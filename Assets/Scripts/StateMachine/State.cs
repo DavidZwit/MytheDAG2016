@@ -23,7 +23,7 @@ public abstract class State : MonoBehaviour {
 	{
         _findSpawner = GameObject.Find("unitSpawner");
         _waveStats = _findSpawner.GetComponent<SpawnSystem>();
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("playerGoliath");
         _alertedByOther = false;
         if (_player != null)
             _targetAlive = true;
