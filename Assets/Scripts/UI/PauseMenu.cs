@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
 	[SerializeField] private GameObject hitFXPanel;
 
 	MouseOrbit mouseOr;
+	WinAndLoseCondition condition;
 
 	private bool isPaused = false;
 
@@ -20,6 +21,7 @@ public class PauseMenu : MonoBehaviour
 
 	void Start()
 	{
+		condition = GameObject.Find ("WinAndLoseCondition").GetComponent<WinAndLoseCondition> ();
 		mouseOr = cam.GetComponent<MouseOrbit>();
 		mouseOr.enabled = true;
 	}
@@ -32,7 +34,8 @@ public class PauseMenu : MonoBehaviour
 
 	public void ThePausedMenu()
 	{
-		if (isPaused == true)
+		
+		if (isPaused)
 		{
 			menuLayout.SetActive (true);
 			Cursor.visible = true;
@@ -45,7 +48,7 @@ public class PauseMenu : MonoBehaviour
 			menuLayout.SetActive (false);
 		}
 
-		if(Input.GetKeyDown(KeyCode.Escape))
+		if(Input.GetKeyDown(KeyCode.Escape) && !condition.isEndCondition)
 		{
 			isPaused = !isPaused;
 			Time.timeScale = 1;
@@ -64,7 +67,6 @@ public class PauseMenu : MonoBehaviour
 	public void Restart()
 	{
 		SceneManager.LoadScene ("MainScene");
-		//Application.runInBackground = true;
 		Time.timeScale = 1;
 		isPaused = false;
 	}

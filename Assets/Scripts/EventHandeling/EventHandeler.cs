@@ -4,13 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class EventHandeler : MonoBehaviour
 {
-
     RandomShake screenShake;
 
     public delegate void ReachedObjective();
     public static event ReachedObjective _ObjectiveReached;
 
-    //AdrenalineBar adrenalineBar;
+	WinAndLoseCondition win;
     RampageBar rampageBar;
     HealthBar healthBar;
     AddScore scoreAdd;
@@ -21,7 +20,8 @@ public class EventHandeler : MonoBehaviour
 
     void Awake()
     {
-        //adrenalineBar = GameObject.Find("AdrenalineBar").GetComponent<AdrenalineBar> (); 
+		
+		win = GameObject.Find("WinAndLoseCondition").GetComponent<WinAndLoseCondition> (); 
         rampageBar = GameObject.Find("RampageBar").GetComponent<RampageBar>();
         healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         scoreAdd = GetComponent<AddScore>();
@@ -51,13 +51,14 @@ public class EventHandeler : MonoBehaviour
         //screenShake.Shake(new Vector2(0.5f, 0.3f), 0.8f, 0.01f);
         coll.gameObject.GetComponent<ChangeToBrokenModelOnCollisionWith>().Break();
 
-        //Adds Adrenaline
-        //adrenalineBar.Adrenaline++;
-
         rampageBar.Rampage++;
 
         if (coll.gameObject.name == "kasteel_model")
-            SceneManager.LoadScene(0);
+		{
+			win.Win ();
+            //SceneManager.LoadScene(0);
+		}
+
     }
 
     public void BulletHitSomething(Collision coll)
@@ -68,10 +69,7 @@ public class EventHandeler : MonoBehaviour
            
         }
         else if (coll.gameObject.tag == "Player")
-        {
-            //Decreases Adrenaline when hit.
-            //adrenalineBar.DamageTaken ();
-
+		{
             //rampageBar.RampageDamageTaken ();
             //print(coll.gameObject.name);
             healthBar.HealthDamageTaken();
@@ -80,19 +78,6 @@ public class EventHandeler : MonoBehaviour
             //For the effect of the hit
         }
     }
-
-    /*
-	void AdrenalineBarDecreasing()
-	{
-		//Decreases the adrenalineBar every few seconds.
-		adrenalineBar.Adrenaline -= 5f;
-		//If the adrenalineBar hits zero, load the following Scene.
-		if(adrenalineBar.Adrenaline <= 0f)
-		{
-			SceneManager.LoadScene ("StartMenu");
-		}
-	}
-	*/
 
     IEnumerator RampageBarDecreasing()
     {

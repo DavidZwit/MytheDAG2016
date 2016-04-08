@@ -19,7 +19,7 @@ public class RampageBar : MonoBehaviour {
 	void Start() 
 	{
 		//makes the scale of the adrenaline bar.
-		rampageImage.transform.localScale = new Vector3(rampage / 50, 0.2f, 0);
+		rampageImage.transform.localScale = new Vector3(rampage / 72, 0.2f, 0);
 	}
 
 	public float Rampage
@@ -54,7 +54,7 @@ public class RampageBar : MonoBehaviour {
 	void Update()
 	{
 		//updates the adrenaline bar smooth when the points go up or down.
-		float newX = Mathf.SmoothDamp (transform.localScale.x, rampage/50 - 0.02f, ref velocity, smoothTime);
+		float newX = Mathf.SmoothDamp (transform.localScale.x, rampage/72 - 0.02f, ref velocity, smoothTime);
         if (newX <= minRampage)
             newX = minRampage;
 		transform.localScale = new Vector3 (newX, transform.localScale.y, transform.localScale.z);
