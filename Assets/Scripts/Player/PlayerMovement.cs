@@ -109,14 +109,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            _anim.SetTrigger("Attack");
+            PlayAudio(7);
+            _anim.SetTrigger("Slam");
             PlayAudio(10);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayAudio(7);
-            _anim.SetTrigger("Slam");
+        {            
+            _anim.SetTrigger("Attack");
             PlayAudio(10);
         }
         if (Input.GetKey(KeyCode.LeftShift))
