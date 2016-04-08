@@ -13,7 +13,6 @@ public class HealthBar : MonoBehaviour {
 	[SerializeField] private float smoothTime = 0.1f;
     PlayerMovement player;
     SoundManager sound;
-    HideMouse cursor;
     OnHitFX hitFx;
 
     private float velocity;
@@ -26,7 +25,6 @@ public class HealthBar : MonoBehaviour {
 		healthImage.transform.localScale = new Vector3(health / 50, 0.2f, 0);
         sound = GameObject.Find("Handeler").GetComponent<SoundManager>();
         player = GameObject.Find("Player(Goliath)").GetComponent<PlayerMovement>();
-        cursor = GameObject.Find("Camera").GetComponent<HideMouse>();
     }
 
 	/*
@@ -65,10 +63,9 @@ public class HealthBar : MonoBehaviour {
 		transform.localScale = new Vector3 (newX, transform.localScale.y, transform.localScale.z);
 		if (health <= 0f) 
 		{
-            SceneManager.LoadScene(0);
-            cursor.UnlockCursor();
             player._anim.SetTrigger("Death");
-            sound.PlayAudio(16);
+            player.enabled = false;
+            sound.PlayAudio(16,Death);
         }
 	}
 
@@ -79,4 +76,9 @@ public class HealthBar : MonoBehaviour {
         hitFx.TurnOn(0.08f);      
 	}
 
+    void Death()
+    {
+        HideMouse.UnlockCursor();
+        SceneManager.LoadScene(0);
+    }
 }

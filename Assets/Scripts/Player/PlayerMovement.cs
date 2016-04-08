@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator _anim;
 
     private bool AudioPlays = false;
-    private bool Run = false;
+    private bool Attack = false;
 
     private float speed;
     private float WalkSpeed = 12f;
@@ -48,9 +48,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Horizontal = Input.GetAxisRaw("Horizontal");
-        Vertical = Input.GetAxisRaw("Vertical");
-        Movement(Horizontal, Vertical);
+        if (Attack == false)
+        {
+            Horizontal = Input.GetAxisRaw("Horizontal");
+            Vertical = Input.GetAxisRaw("Vertical");
+            Movement(Horizontal, Vertical);
+        }
 
         MouseClick();
     }
@@ -107,26 +110,27 @@ public class PlayerMovement : MonoBehaviour
 
     void MouseClick()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Attack == false)
         {
-            PlayAudio(7);
-            _anim.SetTrigger("Slam");
-            PlayAudio(10);
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlayAudio(9);
+                _anim.SetTrigger("Slam");
+                StartCoroutine(waitImpact());
+                Attack = true;
+                StartCoroutine(WaitAttackDone());
+                return;
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {            
-            _anim.SetTrigger("Attack");
-            PlayAudio(10);
-        }
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = RunSpeed;
-            return;
-        }
-        else
-        {
-            speed = WalkSpeed;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = RunSpeed;
+                return;
+            }
+            else
+            {
+                speed = WalkSpeed;
+            }
         }
     }
 
@@ -140,6 +144,16 @@ public class PlayerMovement : MonoBehaviour
         sounds.StopAudio(audioID);
     }
 
+    IEnumerator waitImpact()
+    {
+        yield return new WaitForSeconds(0.5f);
+        PlayAudio(5);
+    }
+    IEnumerator WaitAttackDone()
+    {
+        yield return new WaitForSeconds(1);
+        Attack = false;
+    }
 }
 
 
