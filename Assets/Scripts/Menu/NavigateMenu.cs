@@ -6,19 +6,23 @@ public class NavigateMenu : MonoBehaviour
 {
     private GameObject buttonMenu;
     private GameObject optionMenu;
+    private GameObject creditScreen;
 
     void Start()
     {
         buttonMenu = GameObject.Find("ButtonMenu");
         optionMenu = GameObject.Find("OptionMenu");
+        creditScreen = GameObject.Find("CreditScreen");
 
         optionMenu.SetActive(false);
+        creditScreen.SetActive(false);
     }
 
     //Open the option Menu
     public void OpenOptions()
     {
         buttonMenu.SetActive(false);
+        creditScreen.SetActive(false);
         optionMenu.SetActive(true);
     }
 
@@ -26,6 +30,7 @@ public class NavigateMenu : MonoBehaviour
     public void ReturnToMenu()
     {
         buttonMenu.SetActive(true);
+        creditScreen.SetActive(false);
         optionMenu.SetActive(false);
     }
 
@@ -40,6 +45,13 @@ public class NavigateMenu : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void ShowCredits()
+    {
+        buttonMenu.SetActive(false);
+        creditScreen.SetActive(true);
+        optionMenu.SetActive(false);
     }
 
     //Quits the game
