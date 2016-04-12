@@ -58,22 +58,26 @@ public class HealthBar : MonoBehaviour {
 
 	void Update()
 	{
+        Debug.Log(health);
 		//updates the adrenaline bar smooth when the points go up or down.
 		float newX = Mathf.SmoothDamp (transform.localScale.x, health/72 - 0.02f, ref velocity, smoothTime);
 		transform.localScale = new Vector3 (newX, transform.localScale.y, transform.localScale.z);
 		if (health <= 0f) 
 		{
-            player._anim.SetTrigger("Death");
             player.enabled = false;
-            sound.PlayAudio(16,Death);
+            player._anim.Play("Death"); 
+            sound.PlayAudioIfNotPlaying(16, Death);
         }
 	}
 
 	public void HealthDamageTaken(float damageTaken)
 	{
-		//Player Takes Damage from projectile
-		health -= damageTaken;
-        hitFx.TurnOn(0.08f);      
+        //Player Takes Damage from projectile
+        if (health > 0f)
+        {
+            health -= damageTaken;
+            hitFx.TurnOn(0.08f);
+        }    
 	}
 
     void Death()
