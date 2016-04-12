@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
     //Unfreeze the picked-up projectile and shoot it forward
     public void ShootProjectile(GameObject coll)
     {
-        sound.PlayAudio(9);
+        //sound.PlayAudio(9);
         PlayerAnim._anim.SetTrigger("Throw");
         Rigidbody rb = coll.GetComponent<Rigidbody>();
         rb.isKinematic = false;
