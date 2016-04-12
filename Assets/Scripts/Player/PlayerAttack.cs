@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             RaycastHit hit;
             if (!canThrow) {
                 Debug.DrawRay(transform.position, transform.forward);
